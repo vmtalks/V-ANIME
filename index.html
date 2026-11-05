@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V-ANIME</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0f0f1a;color:#fff}
+header{background:#1a1a2e;padding:15px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.logo{font-size:24px;font-weight:900;color:#ff4757} .logo span{color:#fff}
+.add{background:#ff4757;color:#fff;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer}
+.hero{background:linear-gradient(135deg,#ff4757,#6c5ce7);padding:30px 15px;text-align:center;border-radius:0 0 20px 20px}
+.hero h1{font-size:28px} .hero p{opacity:.9;margin-top:5px}
+.search{margin:15px;padding:0 15px} .search input{width:100%;padding:12px;border-radius:25px;border:none;background:#1e1e35;color:#fff;outline:none}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:15px}
+.card{background:#1e1e35;border-radius:12px;overflow:hidden}
+.card video,.card img{width:100%;height:160px;object-fit:cover;background:#000}
+.card-body{padding:10px} .card-body h3{font-size:14px} .card-body p{font-size:11px;opacity:.6;margin-top:3px}
+.play{width:100%;background:#ff4757;color:#fff;border:none;padding:8px;border-radius:8px;margin-top:8px;cursor:pointer}
+#modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:99;justify-content:center;align-items:center;flex-direction:column;padding:15px}
+#modal video{width:100%;max-width:600px;border-radius:10px}
+#modal button{margin-top:15px;padding:10px 20px;background:#ff4757;border:none;color:#fff;border-radius:20px}
+#uploadBox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:100;justify-content:center;align-items:center}
+.form{background:#1e1e35;padding:20px;border-radius:15px;width:90%;max-width:400px}
+.form input{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:none;background:#0f0f1a;color:#fff}
+.form button{width:100%;padding:11px;background:#ff4757;border:none;color:#fff;border-radius:8px;font-weight:bold}
+</style>
+</head>
+<body>
+<header><div class="logo">V <span>ANIME</span></div><button class="add" onclick="openUpload()">+ Upload</button></header>
+<div class="hero"><h1>V-ANIME</h1><p>The anime world of VM TALKS - Dive in to experience V world</p></div>
+<div class="search"><input id="search" placeholder="Search anime..." oninput="render()"></div>
+<div class="grid" id="grid"></div>
+<div id="modal"><video id="player" controls></video><h3 id="mtitle" style="margin-top:10px"></h3><button onclick="closeModal()">Close</button></div>
+<div id="uploadBox"><div class="form"><h2>Upload Anime</h2><input id="title" placeholder="Anime Title"><input id="pass" type="password" placeholder="Password"><input id="file" type="file" accept="video/*"><button onclick="upload()">Upload Now</button><button style="background:#333;margin-top:8px" onclick="closeUpload()">Cancel</button><p id="status" style="font-size:12px;margin-top:8px"></p></div></div>
+<script>
+let videos = JSON.parse(localStorage.getItem('v_anime')||'[]');
+if(videos.length===0){
+ videos=[
+  {title:"Solo Leveling - Ep 1",url:"https://res.cloudinary.com/demo/video/upload/v1/sample.mp4",img:"https://i.imgur.com/8Qm8Z8x.jpeg"},
+  {title:"Jujutsu Kaisen - Ep 1",url:"https://res.cloudinary.com/demo/video/upload/v1/sample.mp4",img:"https://i.imgur.com/2vQtZBb.jpeg"}
+ ];
+}
+function render(){
+ let q=document.getElementById('search').value.toLowerCase();
+ let g=document.getElementById('grid'); g.innerHTML='';
+ videos.filter(v=>v.title.toLowerCase().includes(q)).forEach((v,i)=>{
+  g.innerHTML+=`<div class="card"><img src="${v.img}"><div class="card-body"><h3>${v.title}</h3><p>V-ANIME - HD</p><button class="play" onclick="play(${i})">Watch Now</button></div></div>`;
+ });
+}
+function play(i){ document.getElementById('modal').style.display='flex'; let p=document.getElementById('player'); p.src=videos[i].url; document.getElementById('mtitle').innerText=videos[i].title; p.play(); }
+function closeModal(){ document.getElementById('modal').style.display='none'; document.getElementById('player').pause(); }
+function openUpload(){ document.getElementById('uploadBox').style.display='flex'; }
+function closeUpload(){ document.getElementById('uploadBox').style.display='none'; }
+async function upload(){
+ let t=document.getElementById('title').value, p=document.getElementById('pass').value, f=document.getElementById('file').files[0];
+ if(p!=='vmtalks123'){ alert('Wrong Password!'); return; }
+ if(!t||!f){ alert('Title aur Video select karo'); return; }
+ document.getElementById('status').innerText='Uploading... Please wait...';
+ let fd=new FormData(); fd.append('file',f); fd.append('upload_preset','e84vwwrw');
+ try{
+  let r=await fetch('https://api.cloudinary.com/v1_1/dv5d8l3xq/video/upload',{method:'POST',body:fd});
+  let d=await r.json();
+  if(d.secure_url){ videos.unshift({title:t,url:d.secure_url,img:'https://i.imgur.com/8Qm8Z8x.jpeg'}); localStorage.setItem('v_anime',JSON.stringify(videos)); render(); document.getElementById('status').innerText='Upload Ho Gaya!'; setTimeout(closeUpload,1000); } else { document.getElementById('status').innerText='Error: '+JSON.stringify(d); }
+ }catch(e){ document.getElementById('status').innerText='Error: '+e.message; }
+}
+render();
+</script>
+</body>
+</html>
