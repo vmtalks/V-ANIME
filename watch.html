@@ -1,57 +1,32 @@
-<!DOCTYPE html>
-<html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>V-ANIME</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#0a0a0f;color:#fff;padding:14px}
-.top{display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:8px}
-.logo img{width:40px;height:40px;border-radius:50%;border:2px solid #a855f7;object-fit:cover}
-.logo h1{font-size:20px}.logo h1 span{color:#a855f7}
-.back{background:#22222e;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:14px}
-.hero{display:flex;gap:14px;margin:16px 0;align-items:center}
-.hero img{width:110px;height:160px;object-fit:cover;border-radius:12px}
-.hero h2{font-size:24px}
-.hero p{font-size:13px;color:#aaa;margin-top:5px;line-height:1.4}
-.hero p b{color:#a855f7}
-#playerBox{display:none;margin:14px 0;background:#000;border-radius:14px;overflow:hidden;border:2px solid #a855f7}
-#playerBox iframe{width:100%;aspect-ratio:16/9;border:none;display:block}
-#now{padding:10px;font-size:13px;color:#c084fc}
-#search{width:100%;padding:12px;border-radius:12px;border:none;background:#22222e;color:#fff;margin:10px 0;outline:none}
-.secTitle{font-size:18px;font-weight:bold;margin:14px 0 4px}
-.secTitle span{color:#a855f7}
-.epGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.epBtn{background:#1a1a24;border:1px solid #2a2a3a;border-radius:12px;padding:12px 4px;text-align:center;cursor:pointer;color:#fff}
-.epBtn.active{background:#a855f7;border-color:#a855f7}
-.epBtn b{display:block;font-size:20px;line-height:1}
-.epBtn small{font-size:11px;color:#aaa}
-.epBtn.active small{color:#fff}
-</style></head><body>
-<div class="top"><div class="logo"><img src="IMG-20261106-WA6885.jpg"><h1>V-<span>ANIME</span></h1></div><a href="index.html"><button class="back">← Back</button></a></div>
-<div class="hero"><img id="poster" src=""><div><h2 id="title">Loading...</h2><p><b id="dub">Hindi Dub</b><br>Tap karo, yahin chalega!</p></div></div>
-<div id="playerBox"><iframe id="player" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe><div id="now">Episode 1 chal raha hai...</div></div>
-<input id="search" placeholder="Episode search karo..." onkeyup="filterEp()">
-<div class="secTitle">Episodes - <span id="epCount"></span></div>
-<div class="epGrid" id="grid"></div>
+<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Watch - V-ANIME</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#0a0a0f;color:#fff;padding:14px}.top{display:flex;align-items:center;gap:12px}.top a{color:#fff;text-decoration:none;font-size:22px}.top img{width:50px;height:50px;border-radius:50%;border:2px solid #a855f7}.top h1{font-size:24px}.top h1 span{color:#a855f7}h2{margin:16px 0 4px}p{color:#aaa;font-size:13px;margin-bottom:12px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.ep{background:#1a1a24;border:1px solid #2a2a3a;padding:14px 0;text-align:center;border-radius:12px;color:#fff;text-decoration:none;font-weight:bold}.ep:active{background:#a855f7}.note{background:#1a1a24;border:1px solid #a855f7;padding:12px;border-radius:12px;font-size:13px;line-height:1.5;margin-top:14px}</style></head><body>
+<div class="top"><a href="index.html">←</a><img src="IMG-20261106-WA6885.jpg"><h1>V-<span>ANIME</span></h1></div>
+<h2 id="t">Loading...</h2><p id="sub"></p>
+<div class="grid" id="eps"></div>
+<div class="note">▶ Episode pe tap karo → YouTube App me Muse India / Ani-One India ka sahi Hindi Dub Episode khul jayega!<br>❌ Agar YouTube me khulta hai to Back dabake wapas aa jao, site band nahi hogi!</div>
 <script>
-// YAHI LIST index.html WALI HAI - DONO ME SAME RAKHNA
-let A=[
-["Mushoku Tensei","Mushoku Tensei Hindi Dub","https://cdn.myanimelist.net/images/anime/1530/117776.jpg","PLpm1VVK4UL17_GoSaunqB9MFvvES607w7",47],
-["Solo Leveling","Solo Leveling Hindi Dub","https://cdn.myanimelist.net/images/anime/1923/147767.jpg","SEARCH",25],
-["Naruto","Naruto Hindi Dub","https://cdn.myanimelist.net/images/anime/1141/142503.jpg","SEARCH",220],
-["One Piece","One Piece Hindi Dub","https://cdn.myanimelist.net/images/anime/6/73245.jpg","SEARCH",100],
-["Demon Slayer","Demon Slayer Hindi Dub","https://cdn.myanimelist.net/images/anime/1286/99889.jpg","SEARCH",55],
-["Jujutsu Kaisen","Jujutsu Kaisen Hindi Dub","https://cdn.myanimelist.net/images/anime/1171/109222.jpg","SEARCH",47],
-["Attack on Titan","Attack on Titan Hindi Dub","https://cdn.myanimelist.net/images/anime/10/47347.jpg","SEARCH",89],
-["Death Note","Death Note Hindi Dub","https://cdn.myanimelist.net/images/anime/9/9453.jpg","SEARCH",37],
-["Dragon Ball Z","Dragon Ball Z Hindi Dub","https://cdn.myanimelist.net/images/anime/1274/109687.jpg","SEARCH",291],
-["Black Clover","Black Clover Hindi Dub","https://cdn.myanimelist.net/images/anime/2/88304.jpg","SEARCH",170],
-["My Hero Academia","My Hero Academia Hindi Dub","https://cdn.myanimelist.net/images/anime/10/78745.jpg","SEARCH",138],
-["Spy x Family","Spy x Family Hindi Dub","https://cdn.myanimelist.net/images/anime/1446/124151.jpg","SEARCH",37],
-["Chainsaw Man","Chainsaw Man Hindi Dub","https://cdn.myanimelist.net/images/anime/1806/126216.jpg","SEARCH",12],
-["One Punch Man","One Punch Man Hindi Dub","https://cdn.myanimelist.net/images/anime/12/76049.jpg","SEARCH",24],
-["Tokyo Revengers","Tokyo Revengers Hindi Dub","https://cdn.myanimelist.net/images/anime/96/110320.jpg","SEARCH",50],
-["Hunter x Hunter","Hunter x Hunter Hindi Dub","https://cdn.myanimelist.net/images/anime/11/33657.jpg","SEARCH",148],
-["Bleach","Bleach Hindi Dub","https://cdn.myanimelist.net/images/anime/3/40451.jpg","SEARCH",366],
-["Fairy Tail","Fairy Tail Hindi Dub","https://cdn.myanimelist.net/images/anime/5/18179.jpg","SEARCH",328],
-["Re:Zero","Re Zero Hindi Dub","https://cdn.myanimelist.net/images/anime/1525/
+let L=[
+"Spy x Family Season 1 Hindi Dub","Spy x Family Season 2 Hindi Dub","Spy x Family Code White Hindi Dub",
+"Mushoku Tensei Season 1 Hindi Dub","Mushoku Tensei Season 2 Hindi Dub","ReZero Season 1 Hindi Dub","ReZero Season 3 Hindi Dub",
+"Attack on Titan Hindi Dub","Hunter x Hunter Hindi Dub","Demon Slayer Hindi Dub","One Punch Man Hindi Dub","Mob Psycho Hindi Dub",
+"Assassination Classroom Hindi Dub","Tokyo Revengers Hindi Dub","Fairy Tail Hindi Dub","DAN DA DAN Hindi Dub",
+"JoJo Phantom Blood Hindi Dub","JoJo Battle Tendency Hindi Dub","JoJo Stardust Crusaders Hindi Dub","JoJo Diamond Is Unbreakable Hindi Dub",
+"JoJo Golden Wind Hindi Dub","God of High School Hindi Dub","Goblin Slayer Hindi Dub","Sword Art Online Hindi Dub","Slime Hindi Dub",
+"Zom 100 Hindi Dub","Kaguya-sama Hindi Dub","Classroom of the Elite Hindi Dub","Detective Is Already Dead Hindi Dub","Cells at Work Hindi Dub",
+"Cells at Work Code Black Hindi Dub","My Dress Up Darling Hindi Dub","Skeleton Knight Hindi Dub","I Parry Everything Hindi Dub",
+"Appraiser Class Hindi Dub","Reborn to Master the Blade Hindi Dub","Standing on a Million Lives Hindi Dub","Iruma-kun Hindi Dub","BOFURI Hindi Dub",
+"Fire Force Hindi Dub","Ragna Crimson Hindi Dub","Trapped in a Dating Sim Hindi Dub","Faraway Paladin Hindi Dub","My Instant Death Ability Hindi Dub",
+"Chained Soldier Hindi Dub","BanG Dream Hindi Dub","Jujutsu Kaisen Hindi Dub","Jujutsu Kaisen Season 2 Hindi Dub"
+];
+let C=[25,12,1,23,24,25,16,89,148,26,12,12,47,24,48,12,9,17,48,39,39,13,12,25,24,12,12,25,12,21,13,12,12,12,12,12,12,21,12,24,24,12,12,12,12,13,24,23];
+let Ch=["MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","MuseIN","AniOneIndia","AniOneIndia"];
+let id=parseInt(new URLSearchParams(location.search).get("id")||0);
+document.getElementById("t").innerText=L[id];
+document.getElementById("sub").innerText="Hindi Dub • "+C[id]+" Episodes • "+Ch[id];
+let box=document.getElementById("eps");
+for(let e=1;e<=C[id];e++){
+let q=encodeURIComponent(L[id]+" Episode "+e);
+let url="https://www.youtube.com/@"+Ch[id]+"/search?query="+q;
+box.innerHTML+=`<a class="ep" href="${url}" target="_blank">Ep ${e}</a>`;
+}
+</script></body></html>
