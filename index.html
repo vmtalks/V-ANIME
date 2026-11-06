@@ -1,123 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>V-ANIME</title>
+<html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V-ANIME - Hindi Dub Anime</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0a0a0a;color:white;padding:15px}
-h1{font-size:28px;text-align:center;margin:10px 0}
-h1 span{color:#ff2d55}
-.search{width:100%;padding:12px;border-radius:10px;border:none;background:#222;color:white;margin:10px 0;font-size:16px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#fff;font-family:Arial,sans-serif;padding:15px}
+.top{text-align:center;margin:10px 0 15px}
+.top h1{color:#ff4757;font-size:32px}
+.top p{color:#aaa;font-size:13px;margin-top:4px}
+#search{width:100%;padding:13px;border-radius:10px;border:none;background:#222;color:#fff;font-size:16px;margin-bottom:15px;outline:none}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.card{background:#1a1a1a;border-radius:12px;overflow:hidden;cursor:pointer}
-.card img{width:100%;height:220px;object-fit:cover}
-.card-info{padding:10px}
-.card-info b{font-size:15px}
-.card-info p{font-size:12px;color:#aaa;margin-top:4px}
-#detail{display:none;position:fixed;inset:0;background:#0a0a0a;z-index:99;overflow-y:auto;padding:15px}
-#detail img{width:100%;height:280px;object-fit:cover;border-radius:12px}
-.btn{padding:12px 18px;background:#ff2d55;border:none;color:white;border-radius:10px;margin:5px;cursor:pointer;font-size:15px}
-.epBtn{background:#222;width:100%;text-align:left;padding:13px;border-radius:10px;border:none;color:white;margin:6px 0;cursor:pointer}
-iframe{width:100%;height:220px;border-radius:12px;border:none;margin-top:10px;background:#000}
-.back{position:sticky;top:0;background:#0a0a0a;padding:5px 0;z-index:10}
-</style>
-</head>
-<body>
+.card{background:#1e1e1e;border-radius:12px;overflow:hidden;text-decoration:none;color:#fff;display:block}
+.card img{width:100%;height:230px;object-fit:cover;display:block;background:#333}
+.card b{display:block;padding:9px 8px 2px;font-size:14px;line-height:1.2}
+.card p{padding:0 8px 10px;color:#ff4757;font-size:12px}
+.footer{text-align:center;color:#666;font-size:12px;margin:25px 0 10px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(5,1fr)}.card img{height:260px}}
+</style></head><body>
 
-<h1>V-<span>ANIME</span></h1>
-<input class="search" id="search" placeholder="Search Anime..." oninput="filterAnime()">
-<div class="grid" id="grid"><p style="text-align:center;width:100%;grid-column:span 2">Loading... Sheet se Anime aa rahe hai...</p></div>
+<div class="top">
+<h1>🔥 V-ANIME</h1>
+<p>50 Anime • Hindi Dub • Free</p>
+</div>
 
-<div id="detail"></div>
+<input id="search" placeholder="Search karo... Naruto, Solo Leveling, Mushoku..." onkeyup="filter()">
+
+<div class="grid" id="grid"></div>
+<div class="footer">V-ANIME • Kal se Naya Anime = Nayi File</div>
 
 <script>
-// ============ YAHAN APNI SHEET KA LINK DALNA HAI ============
-// Sheet ko Publish karne ke baad jo CSV link milega wo yahan paste karna
-const ANIME_SHEET_URL = "YAHAN_ANIME_SHEET_CSV_LINK_DALO";
-const EPISODE_SHEET_URL = "YAHAN_EPISODE_SHEET_CSV_LINK_DALO";
-// ============================================================
-
-let allAnime = [];
-let allEpisodes = [];
-
-function csvToArray(csv){
-  let rows = csv.split("\n").map(r => r.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g,'').trim()));
-  let header = rows[0];
-  return rows.slice(1).filter(r=>r[0]).map(r=>{
-    let o={}; header.forEach((h,i)=>o[h]=r[i]||""); return o;
-  });
+const animes=[
+{name:"Mushoku Tensei",type:"Isekai",poster:"https://cdn.myanimelist.net/images/anime/1530/117776.jpg",file:"mushoku.html"},
+{name:"Shangri-La Frontier",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1695/136667.jpg",file:"shangrila.html"},
+{name:"Naruto",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1141/142503.jpg",file:"naruto.html"},
+{name:"One Piece",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/6/73245.jpg",file:"onepiece.html"},
+{name:"Solo Leveling",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1929/140600.jpg",file:"sololeveling.html"},
+{name:"Demon Slayer",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1286/99889.jpg",file:"demonslayer.html"},
+{name:"Jujutsu Kaisen",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1171/109222.jpg",file:"jujutsukaisen.html"},
+{name:"Attack on Titan",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/10/47347.jpg",file:"aot.html"},
+{name:"Death Note",type:"Thriller",poster:"https://cdn.myanimelist.net/images/anime/9/9453.jpg",file:"deathnote.html"},
+{name:"One Punch Man",type:"Comedy",poster:"https://cdn.myanimelist.net/images/anime/12/76049.jpg",file:"onepunchman.html"},
+{name:"Dragon Ball Z",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/6/20936.jpg",file:"dbz.html"},
+{name:"Dragon Ball Super",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/6/78300.jpg",file:"dbsuper.html"},
+{name:"Bleach",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/3/40451.jpg",file:"bleach.html"},
+{name:"Black Clover",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/2/88336.jpg",file:"blackclover.html"},
+{name:"My Hero Academia",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/10/78745.jpg",file:"mha.html"},
+{name:"Chainsaw Man",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1806/126216.jpg",file:"chainsawman.html"},
+{name:"Spy x Family",type:"Comedy",poster:"https://cdn.myanimelist.net/images/anime/1441/122795.jpg",file:"spyxfamily.html"},
+{name:"Vinland Saga",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1500/103658.jpg",file:"vinland.html"},
+{name:"Tokyo Revengers",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1498/110360.jpg",file:"tokyorevengers.html"},
+{name:"Hunter x Hunter",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/11/33657.jpg",file:"hxh.html"},
+{name:"Fullmetal Alchemist",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1223/96541.jpg",file:"fma.html"},
+{name:"Re:Zero",type:"Isekai",poster:"https://cdn.myanimelist.net/images/anime/1522/109222.jpg",file:"rezero.html"},
+{name:"Sword Art Online",type:"Isekai",poster:"https://cdn.myanimelist.net/images/anime/11/39717.jpg",file:"sao.html"},
+{name:"That Time I Got Reincarnated As A Slime",type:"Isekai",poster:"https://cdn.myanimelist.net/images/anime/1694/93337.jpg",file:"slime.html"},
+{name:"Overlord",type:"Isekai",poster:"https://cdn.myanimelist.net/images/anime/1530/117776.jpg",file:"overlord.html"},
+{name:"Konosuba",type:"Comedy Isekai",poster:"https://cdn.myanimelist.net/images/anime/1301/93586.jpg",file:"konosuba.html"},
+{name:"Shield Hero",type:"Isekai",poster:"https://cdn.myanimelist.net/images/anime/1326/96698.jpg",file:"shieldhero.html"},
+{name:"Frieren",type:"Fantasy",poster:"https://cdn.myanimelist.net/images/anime/1015/138006.jpg",file:"frieren.html"},
+{name:"Kaiju No.8",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1707/138398.jpg",file:"kaiju8.html"},
+{name:"Dandadan",type:"Action Comedy",poster:"https://cdn.myanimelist.net/images/anime/1584/143719.jpg",file:"dandadan.html"},
+{name:"Dr. Stone",type:"Sci-Fi",poster:"https://cdn.myanimelist.net/images/anime/2/102232.jpg",file:"drstone.html"},
+{name:"Fire Force",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1287/100839.jpg",file:"fireforce.html"},
+{name:"Tokyo Ghoul",type:"Dark",poster:"https://cdn.myanimelist.net/images/anime/5/64449.jpg",file:"tokyoghoul.html"},
+{name:"Parasyte",type:"Horror",poster:"https://cdn.myanimelist.net/images/anime/4/39631.jpg",file:"parasyte.html"},
+{name:"Code Geass",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/5/50331.jpg",file:"codegeass.html"},
+{name:"Steins;Gate",type:"Sci-Fi",poster:"https://cdn.myanimelist.net/images/anime/5/73199.jpg",file:"steinsgate.html"},
+{name:"Your Name",type:"Movie Romance",poster:"https://cdn.myanimelist.net/images/anime/5/87048.jpg",file:"yourname.html"},
+{name:"Weathering With You",type:"Movie",poster:"https://cdn.myanimelist.net/images/anime/5/98448.jpg",file:"weathering.html"},
+{name:"Boruto",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/3/83566.jpg",file:"boruto.html"},
+{name:"Fairy Tail",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/5/18179.jpg",file:"fairytail.html"},
+{name:"Seven Deadly Sins",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/8/65409.jpg",file:"sevendeadly.html"},
+{name:"Mob Psycho 100",type:"Action Comedy",poster:"https://cdn.myanimelist.net/images/anime/8/80356.jpg",file:"mobpsycho.html"},
+{name:"Haikyuu",type:"Sports",poster:"https://cdn.myanimelist.net/images/anime/4/75598.jpg",file:"haikyuu.html"},
+{name:"Blue Lock",type:"Sports",poster:"https://cdn.myanimelist.net/images/anime/1167/133361.jpg",file:"bluelock.html"},
+{name:"Classroom of the Elite",type:"Thriller",poster:"https://cdn.myanimelist.net/images/anime/5/86830.jpg",file:"cote.html"},
+{name:"Sakamoto Days",type:"Action Comedy",poster:"https://cdn.myanimelist.net/images/anime/1511/141805.jpg",file:"sakamoto.html"},
+{name:"Zom 100",type:"Comedy Horror",poster:"https://cdn.myanimelist.net/images/anime/1735/134099.jpg",file:"zom100.html"},
+{name:"Jujutsu Kaisen Season 2",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1171/109222.jpg",file:"jjk2.html"},
+{name:"Demon Slayer Season 2",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1286/99889.jpg",file:"ds2.html"},
+{name:"Vinland Saga Season 2",type:"Action",poster:"https://cdn.myanimelist.net/images/anime/1500/103658.jpg",file:"vinland2.html"}
+];
+function render(list){
+document.getElementById('grid').innerHTML=list.map(a=>`<a class="card" href="${a.file}"><img src="${a.poster}" onerror="this.src='https://via.placeholder.com/300x450/1e1e1e/ffffff?text='+encodeURIComponent(a.name)"><b>${a.name}</b><p>${a.type} • Hindi Dub</p></a>`).join('')
 }
-
-async function load(){
-  try{
-    let a = await fetch(ANIME_SHEET_URL).then(r=>r.text());
-    let e = await fetch(EPISODE_SHEET_URL).then(r=>r.text());
-    allAnime = csvToArray(a);
-    allEpisodes = csvToArray(e);
-    showAnime(allAnime);
-  }catch(err){
-    document.getElementById("grid").innerHTML = "<p>Sheet Link Galat Hai! Neeche wale step se link dobara dalo.</p>";
-  }
-}
-
-function getYoutubeId(url){
-  if(!url) return "";
-  let m = url.match(/(?:youtube\.com\/.*v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([^&?\/\s]+)/);
-  return m ? m[1] : "";
-}
-
-function showAnime(list){
-  let grid = document.getElementById("grid");
-  if(list.length==0){ grid.innerHTML="<p>Koi Anime Nahi Mila. Sheet me Anime Add Karo.</p>"; return; }
-  grid.innerHTML = list.map((a,i)=>{
-    let idx = allAnime.indexOf(a);
-    return `<div class="card" onclick="openDetail(${idx})">
-      <img src="${a.Poster}" onerror="this.src='https://via.placeholder.com/300x400?text='+encodeURIComponent(a.Name)">
-      <div class="card-info"><b>${a.Name}</b><p>${a.Type}</p></div>
-    </div>`;
-  }).join("");
-}
-
-function filterAnime(){
-  let q = document.getElementById("search").value.toLowerCase();
-  showAnime(allAnime.filter(a=>a.Name.toLowerCase().includes(q)));
-}
-
-function openDetail(idx){
-  let a = allAnime[idx];
-  let eps = allEpisodes.filter(e=>e.Anime.toLowerCase().trim()===a.Name.toLowerCase().trim());
-  let trailerId = getYoutubeId(a.Trailer);
-  let trailerEmbed = trailerId ? `<iframe src="https://www.youtube.com/embed/${trailerId}" allowfullscreen></iframe>` : `<p>Trailer Nahi Hai</p>`;
-  let epHtml = eps.length ? eps.map(ep=>{
-    let vidId = getYoutubeId(ep.Link);
-    let playLink = vidId ? `https://www.youtube.com/embed/${vidId}` : ep.Link;
-    return `<button class="epBtn" onclick="playVideo('${playLink}')">▶ Episode ${ep.Episode}</button>`;
-  }).join("") : "<p>Abhi Episode Add Nahi Hue Hai.</p>";
-
-  document.getElementById("detail").innerHTML = `
-    <div class="back"><button class="btn" onclick="closeDetail()">← Back</button></div>
-    <img src="${a.Poster}">
-    <h2 style="margin:10px 0">${a.Name} <span style="font-size:13px;color:#aaa">(${a.Type})</span></h2>
-    <h3>🎬 Trailer</h3>
-    ${trailerEmbed}
-    <div id="player"></div>
-    <h3 style="margin-top:15px">📺 Episodes</h3>
-    ${epHtml}
-  `;
-  document.getElementById("detail").style.display="block";
-  window.scrollTo(0,0);
-}
-
-function playVideo(link){
-  document.getElementById("player").innerHTML = `<h3 style="margin-top:15px">▶ Now Playing</h3><iframe src="${link}" allowfullscreen></iframe>`;
-  document.getElementById("player").scrollIntoView();
-}
-
-function closeDetail(){ document.getElementById("detail").style.display="none"; }
-
-load();
-</script>
-</body>
-</html>
+function filter(){let q=document.getElementById('search').value.toLowerCase();render(animes.filter(a=>a.name.toLowerCase().includes(q)))}
+render(animes);
+</script></body></html>
