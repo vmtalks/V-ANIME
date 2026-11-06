@@ -17,33 +17,37 @@ h1{color:#ff2d55;margin:0}
 .video-box{position:relative;width:100%;border-radius:15px;overflow:hidden}
 .video-box iframe{width:100%;height:220px;border:0;display:block}
 .watermark{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.65);color:white;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold;pointer-events:none}
-.seasons{display:flex;gap:10px;margin:15px 0}
-.seasons button{background:#222;color:white;border:none;padding:10px 20px;border-radius:20px}
+.watch{background:#ff2d55;color:white;display:block;text-align:center;padding:13px;border-radius:12px;text-decoration:none;font-weight:bold;margin:15px 0}
+.watch small{display:block;font-weight:normal;font-size:12px;margin-top:2px}
+.seasons{display:flex;gap:10px;margin:10px 0;overflow-x:auto}
+.seasons button{background:#222;color:white;border:none;padding:10px 20px;border-radius:20px;white-space:nowrap}
 .seasons button.active{background:#ff2d55}
 .ep-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.ep{background:#1e1e1e;padding:15px 0;text-align:center;border-radius:12px;font-weight:bold}
+.ep{background:#1e1e1e;padding:14px 0;text-align:center;border-radius:12px;font-weight:bold;cursor:pointer}
 .ep small{display:block;font-weight:normal;color:#aaa;font-size:11px;margin-top:3px}
+.info{background:#1e1e1e;padding:12px;border-radius:12px;font-size:13px;color:#ccc;line-height:1.5}
 </style>
 </head>
 <body>
 
-<!-- HOME PAGE -->
+<!-- HOME -->
 <div id="home">
 <h1>V ANIME 🔥</h1>
-<p class="sub">Hindi Dubbed Anime - Free</p>
+<p class="sub">Hindi Dubbed Anime - Free Guide</p>
 <div class="grid">
   <div class="card" onclick="openAnime('solo')">
     <img src="https://image.tmdb.org/t/p/w500/geCRueV3x1vJpAPgXc8y8s6qQwBS.jpg" onerror="this.src='https://serializd-tmdb-images.b-cdn.net/t/p/original/YG9N8y9EWSvGBCCi3J4Gab1wiD.jpg'">
-    <h3>Solo Leveling</h3><p>Tap to Watch</p>
+    <h3>Solo Leveling</h3><p>2 Seasons • 25 Episodes</p>
   </div>
   <div class="card" onclick="openAnime('jjk')">
     <img src="https://upload.wikimedia.org/wikipedia/en/4/46/Jujutsu_kaisen.jpg">
-    <h3>Jujutsu Kaisen</h3><p>Tap to Watch</p>
+    <h3>Jujutsu Kaisen</h3><p>2 Seasons • 47 Episodes</p>
   </div>
 </div>
+<p style="font-size:12px;color:#777;margin-top:20px">V-ANIME sirf guide hai. Episodes official apps pe dekhe.</p>
 </div>
 
-<!-- SOLO LEVELING PAGE -->
+<!-- SOLO LEVELING -->
 <div id="page-solo" class="page">
 <button class="back" onclick="goHome()">← Back</button>
 <h1>Solo Leveling</h1>
@@ -52,23 +56,21 @@ h1{color:#ff2d55;margin:0}
   <iframe id="video-solo" src="" allowfullscreen></iframe>
   <div class="watermark">V-ANIME 🔥</div>
 </div>
+<a class="watch" href="https://www.crunchyroll.com/series/GDKHZEJ0Y/solo-leveling" target="_blank">▶ Watch Free on Crunchyroll<small>Free + Ads • Free Account Chahiye</small></a>
+<div class="info"><b>Story:</b> Duniya ka sabse kamzor Hunter Sung Jinwoo, ek secret dungeon me powers paata hai aur sabse strong ban jata hai.</div>
 <div class="seasons">
-  <button class="active" onclick="showSeason(this,'solo-s1')">Season 1</button>
-  <button onclick="showSeason(this,'solo-s2')">Season 2</button>
+  <button class="active" onclick="showSeason(this,'solo-s1')">Season 1 • 12 Ep</button>
+  <button onclick="showSeason(this,'solo-s2')">Season 2 • 13 Ep</button>
 </div>
 <div id="solo-s1" class="ep-grid">
-  <div class="ep">1<small>Hindi Dub</small></div><div class="ep">2<small>Hindi Dub</small></div><div class="ep">3<small>Hindi Dub</small></div><div class="ep">4<small>Hindi Dub</small></div>
-  <div class="ep">5<small>Hindi Dub</small></div><div class="ep">6<small>Hindi Dub</small></div><div class="ep">7<small>Hindi Dub</small></div><div class="ep">8<small>Hindi Dub</small></div>
-  <div class="ep">9<small>Hindi Dub</small></div><div class="ep">10<small>Hindi Dub</small></div><div class="ep">11<small>Hindi Dub</small></div><div class="ep">12<small>Hindi Dub</small></div>
+<div class="ep">1<small>Hindi Dub</small></div><div class="ep">2<small>Hindi Dub</small></div><div class="ep">3<small>Hindi Dub</small></div><div class="ep">4<small>Hindi Dub</small></div><div class="ep">5<small>Hindi Dub</small></div><div class="ep">6<small>Hindi Dub</small></div><div class="ep">7<small>Hindi Dub</small></div><div class="ep">8<small>Hindi Dub</small></div><div class="ep">9<small>Hindi Dub</small></div><div class="ep">10<small>Hindi Dub</small></div><div class="ep">11<small>Hindi Dub</small></div><div class="ep">12<small>Hindi Dub</small></div>
 </div>
 <div id="solo-s2" class="ep-grid" style="display:none">
-  <div class="ep">1<small>Hindi Dub</small></div><div class="ep">2<small>Hindi Dub</small></div><div class="ep">3<small>Hindi Dub</small></div><div class="ep">4<small>Hindi Dub</small></div>
-  <div class="ep">5<small>Hindi Dub</small></div><div class="ep">6<small>Hindi Dub</small></div><div class="ep">7<small>Hindi Dub</small></div><div class="ep">8<small>Hindi Dub</small></div>
-  <div class="ep">9<small>Hindi Dub</small></div><div class="ep">10<small>Hindi Dub</small></div><div class="ep">11<small>Hindi Dub</small></div><div class="ep">12<small>Hindi Dub</small></div><div class="ep">13<small>Hindi Dub</small></div>
+<div class="ep">1<small>Hindi Dub</small></div><div class="ep">2<small>Hindi Dub</small></div><div class="ep">3<small>Hindi Dub</small></div><div class="ep">4<small>Hindi Dub</small></div><div class="ep">5<small>Hindi Dub</small></div><div class="ep">6<small>Hindi Dub</small></div><div class="ep">7<small>Hindi Dub</small></div><div class="ep">8<small>Hindi Dub</small></div><div class="ep">9<small>Hindi Dub</small></div><div class="ep">10<small>Hindi Dub</small></div><div class="ep">11<small>Hindi Dub</small></div><div class="ep">12<small>Hindi Dub</small></div><div class="ep">13<small>Hindi Dub</small></div>
 </div>
 </div>
 
-<!-- JJK PAGE -->
+<!-- JJK -->
 <div id="page-jjk" class="page">
 <button class="back" onclick="goHome()">← Back</button>
 <h1>Jujutsu Kaisen</h1>
@@ -77,18 +79,18 @@ h1{color:#ff2d55;margin:0}
   <iframe id="video-jjk" src="" allowfullscreen></iframe>
   <div class="watermark">V-ANIME 🔥</div>
 </div>
+<a class="watch" href="https://www.crunchyroll.com/series/GRDV0019R/jujutsu-kaisen" target="_blank">▶ Watch Free on Crunchyroll<small>Free + Ads • Free Account Chahiye</small></a>
+<a class="watch" href="https://www.jiohotstar.com/" target="_blank" style="background:#1a5cff">▶ Watch on JioHotstar<small>Hindi Dub • Sony YAY! Version</small></a>
+<div class="info"><b>Story:</b> Yuji Itadori ek shrapit ungli kha leta hai aur duniya ke sabse khatarnak shrap Sukuna ka host ban jata hai.</div>
 <div class="seasons">
-  <button class="active" onclick="showSeason(this,'jjk-s1')">Season 1</button>
-  <button onclick="showSeason(this,'jjk-s2')">Season 2</button>
+  <button class="active" onclick="showSeason(this,'jjk-s1')">Season 1 • 24 Ep</button>
+  <button onclick="showSeason(this,'jjk-s2')">Season 2 • 23 Ep</button>
 </div>
 <div id="jjk-s1" class="ep-grid">
-  <div class="ep">1<small>Hindi Dub</small></div><div class="ep">2<small>Hindi Dub</small></div><div class="ep">3<small>Hindi Dub</small></div><div class="ep">4<small>Hindi Dub</small></div>
-  <div class="ep">5<small>Hindi Dub</small></div><div class="ep">6<small>Hindi Dub</small></div><div class="ep">7<small>Hindi Dub</small></div><div class="ep">8<small>Hindi Dub</small></div>
-  <div class="ep">9<small>Hindi Dub</small></div><div class="ep">10<small>Hindi Dub</small></div><div class="ep">11<small>Hindi Dub</small></div><div class="ep">12<small>Hindi Dub</small></div>
+<div class="ep">1<small>Hindi Dub</small></div><div class="ep">2<small>Hindi Dub</small></div><div class="ep">3<small>Hindi Dub</small></div><div class="ep">4<small>Hindi Dub</small></div><div class="ep">5<small>Hindi Dub</small></div><div class="ep">6<small>Hindi Dub</small></div><div class="ep">7<small>Hindi Dub</small></div><div class="ep">8<small>Hindi Dub</small></div><div class="ep">9<small>Hindi Dub</small></div><div class="ep">10<small>Hindi Dub</small></div><div class="ep">11<small>Hindi Dub</small></div><div class="ep">12<small>Hindi Dub</small></div><div class="ep">13<small>Hindi Dub</small></div><div class="ep">14<small>Hindi Dub</small></div><div class="ep">15<small>Hindi Dub</small></div><div class="ep">16<small>Hindi Dub</small></div><div class="ep">17<small>Hindi Dub</small></div><div class="ep">18<small>Hindi Dub</small></div><div class="ep">19<small>Hindi Dub</small></div><div class="ep">20<small>Hindi Dub</small></div><div class="ep">21<small>Hindi Dub</small></div><div class="ep">22<small>Hindi Dub</small></div><div class="ep">23<small>Hindi Dub</small></div><div class="ep">24<small>Hindi Dub</small></div>
 </div>
 <div id="jjk-s2" class="ep-grid" style="display:none">
-  <div class="ep">1<small>Hindi Dub</small></div><div class="ep">2<small>Hindi Dub</small></div><div class="ep">3<small>Hindi Dub</small></div><div class="ep">4<small>Hindi Dub</small></div>
-  <div class="ep">5<small>Hindi Dub</small></div><div class="ep">6<small>Hindi Dub</small></div><div class="ep">7<small>Hindi Dub</small></div><div class="ep">8<small>Hindi Dub</small></div>
+<div class="ep">1<small>Hindi Dub</small></div><div class="ep">2<small>Hindi Dub</small></div><div class="ep">3<small>Hindi Dub</small></div><div class="ep">4<small>Hindi Dub</small></div><div class="ep">5<small>Hindi Dub</small></div><div class="ep">6<small>Hindi Dub</small></div><div class="ep">7<small>Hindi Dub</small></div><div class="ep">8<small>Hindi Dub</small></div><div class="ep">9<small>Hindi Dub</small></div><div class="ep">10<small>Hindi Dub</small></div><div class="ep">11<small>Hindi Dub</small></div><div class="ep">12<small>Hindi Dub</small></div><div class="ep">13<small>Hindi Dub</small></div><div class="ep">14<small>Hindi Dub</small></div><div class="ep">15<small>Hindi Dub</small></div><div class="ep">16<small>Hindi Dub</small></div><div class="ep">17<small>Hindi Dub</small></div><div class="ep">18<small>Hindi Dub</small></div><div class="ep">19<small>Hindi Dub</small></div><div class="ep">20<small>Hindi Dub</small></div><div class="ep">21<small>Hindi Dub</small></div><div class="ep">22<small>Hindi Dub</small></div><div class="ep">23<small>Hindi Dub</small></div>
 </div>
 </div>
 
