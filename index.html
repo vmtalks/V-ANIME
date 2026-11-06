@@ -5,28 +5,45 @@
 <title>V ANIME</title>
 <style>
 body{background:#0f0f0f;color:white;font-family:sans-serif;margin:0;padding:15px}
-h1{color:#ff2d55}
+h1{color:#ff2d55;margin:0}
+p{color:#aaa}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.card{background:#1e1e1e;border-radius:15px;overflow:hidden;text-align:center;padding-bottom:10px}
+.card{background:#1e1e1e;border-radius:15px;overflow:hidden;padding-bottom:12px;text-align:center}
 .card img{width:100%;height:260px;object-fit:cover;display:block}
-button{background:#ff2d55;color:white;border:none;padding:10px 20px;border-radius:20px;font-size:16px}
+.video-box{position:relative;width:100%;margin-top:10px}
+.video-box iframe{width:100%;height:200px;border:0;display:block}
+.watermark{position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.65);color:white;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold;pointer-events:none}
+h3{margin:10px 0 2px 0}
 </style>
 </head>
 <body>
 <h1>V ANIME 🔥</h1>
-<button>+ Upload</button>
-<br><br>
+<p>Hindi Dubbed Anime - Free</p>
+
 <div class="grid">
+
+  <!-- SOLO LEVELING -->
   <div class="card">
     <img src="https://image.tmdb.org/t/p/w500/geCRueV3x1vJpAPgXc8y8s6qQwBS.jpg" onerror="this.src='https://serializd-tmdb-images.b-cdn.net/t/p/original/YG9N8y9EWSvGBCCi3J4Gab1wiD.jpg'">
     <h3>Solo Leveling</h3>
-    <p>Ep 1 - Hindi Dub</p>
+    <p style="margin:0;font-size:13px">Hindi Dub Trailer</p>
+    <div class="video-box">
+      <iframe src="https://www.youtube.com/embed/n24l9gvM3XM" allowfullscreen></iframe>
+      <div class="watermark">V-ANIME 🔥</div>
+    </div>
   </div>
+
+  <!-- JUJUTSU KAISEN -->
   <div class="card">
     <img src="https://upload.wikimedia.org/wikipedia/en/4/46/Jujutsu_kaisen.jpg">
     <h3>Jujutsu Kaisen</h3>
-    <p>Ep 1 - Hindi Dub</p>
+    <p style="margin:0;font-size:13px">Official Trailer</p>
+    <div class="video-box">
+      <iframe src="https://www.youtube.com/embed/pkKu9hLT-t8" allowfullscreen></iframe>
+      <div class="watermark">V-ANIME 🔥</div>
+    </div>
   </div>
+
 </div>
 </body>
 </html>
