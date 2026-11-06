@@ -1,95 +1,122 @@
 <!DOCTYPE html>
 <html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mushoku Tensei - Hindi Dub | V-ANIME</title>
+<title>Mushoku Tensei - V-ANIME</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0f0f0f;color:#fff;font-family:Arial,sans-serif;padding:15px}
-.back{display:inline-block;background:#222;color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none;font-size:14px}
-.top{display:flex;gap:15px;margin:15px 0}
-.top img{width:140px;border-radius:12px}
-.top h2{font-size:22px}
-.top p{color:#ff4757;font-size:13px;margin:6px 0}
-.top span{color:#aaa;font-size:13px;line-height:1.4;display:block}
-#playerBox{display:none;margin:10px 0}
-#player{width:100%;aspect-ratio:16/9;border:none;border-radius:12px}
-#nowPlaying{background:#1e1e1e;padding:10px;border-radius:10px;font-size:14px;margin-bottom:10px;display:none}
-#nowPlaying b{color:#ff4757}
-#search{width:100%;padding:12px;border-radius:10px;border:none;background:#222;color:#fff;font-size:15px;margin:10px 0;outline:none}
-h3{margin:18px 0 5px;color:#ff4757;font-size:18px}
-.note{color:#aaa;font-size:13px;margin-bottom:10px;line-height:1.5}
-.note b{color:#ffcc00}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.ep{background:#1e1e1e;color:#fff;padding:13px 5px;text-align:center;border-radius:10px;font-weight:bold;font-size:14px;display:block;border:none;width:100%;cursor:pointer}
-.ep:hover,.ep.active{background:#ff4757}
-.ep small{display:block;font-size:11px;color:#ddd;font-weight:normal;margin-top:2px}
-.ep.s3{background:#2a2a1e;border:1px solid #ffcc00}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0a0a0f;color:#fff;padding:14px}
+.top{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px}
+.logo img{width:40px;height:40px;border-radius:50%;border:2px solid #a855f7;object-fit:cover}
+.logo h1{font-size:20px}.logo h1 span{color:#a855f7}
+.back{background:#22222e;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-size:14px}
+.hero{display:flex;gap:14px;margin:16px 0;align-items:center}
+.hero img{width:110px;height:160px;object-fit:cover;border-radius:12px}
+.hero h2{font-size:24px}
+.hero p{font-size:13px;color:#aaa;margin-top:5px;line-height:1.4}
+.hero p b{color:#a855f7}
+#playerBox{display:none;margin:14px 0;background:#000;border-radius:14px;overflow:hidden;border:2px solid #a855f7}
+#playerBox iframe{width:100%;aspect-ratio:16/9;border:none;display:block}
+#now{padding:10px;font-size:13px;color:#c084fc}
+#search{width:100%;padding:12px;border-radius:12px;border:none;background:#22222e;color:#fff;margin:10px 0;outline:none}
+.seasonTabs{display:flex;gap:10px;margin:14px 0;overflow-x:auto}
+.seasonTabs button{flex:1;min-width:130px;padding:11px;border-radius:12px;border:none;font-weight:bold;font-size:14px;cursor:pointer}
+.seasonTabs button.active{background:#a855f7;color:#fff}
+.seasonTabs button.inactive{background:#1a1a24;color:#aaa}
+.secTitle{font-size:18px;font-weight:bold;margin:14px 0 4px}
+.secTitle span{color:#a855f7}
+.sub{font-size:13px;color:#aaa;margin-bottom:12px}
+.sub b{color:#a855f7}
+/* YE WALA CIRCLE KIYA HUA STYLE */
+.epGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.epBtn{background:#1a1a24;border:1px solid #2a2a3a;border-radius:12px;padding:12px 4px;text-align:center;cursor:pointer;color:#fff}
+.epBtn:active,.epBtn.active{background:#a855f7;border-color:#a855f7}
+.epBtn b{display:block;font-size:20px;line-height:1}
+.epBtn small{font-size:11px;color:#aaa}
+.epBtn.active small{color:#fff}
+.footer{text-align:center;color:#555;font-size:12px;margin:25px 0}
 </style></head><body>
 
-<a class="back" href="index.html">⬅ Back to Home</a>
-
 <div class="top">
-<img src="https://cdn.myanimelist.net/images/anime/1530/117776.jpg">
-<div>
-<h2>Mushoku Tensei</h2>
-<p>Jobless Reincarnation • Hindi Dub</p>
-<span>Isekai • Fantasy • Action<br>Tap karo, yahin chalega!</span>
-</div>
+<div class="logo"><img src="IMG-20261106-WA6885.jpg"><h1>V-<span>ANIME</span></h1></div>
+<a href="index.html"><button class="back">← Back to Home</button></a>
 </div>
 
-<div id="nowPlaying">▶ Ab Chal Raha Hai: <b id="nowText">Episode 1</b></div>
-<div id="playerBox"><iframe id="player" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe></div>
+<div class="hero">
+<img src="https://cdn.myanimelist.net/images/anime/1530/117776.jpg">
+<div><h2>Mushoku Tensei</h2><p><b>Jobless Reincarnation • Hindi Dub</b><br>Isekai • Fantasy • Action<br>Tap karo, yahin chalega!</p></div>
+</div>
+
+<div id="playerBox"><iframe id="player" src="" allowfullscreen></iframe><div id="now">Episode 1 - Hindi Dub chal raha hai...</div></div>
 
 <input id="search" placeholder="Episode search karo... 1, 5, 12..." onkeyup="filterEp()">
 
-<!-- SEASON 1 -->
-<h3>Season 1 - Episodes 1 to 23</h3>
-<p class="note">✅ <b>Hindi Dub</b> - Tap karte hi upar Player me chalega!</p>
-<div class="grid" id="s1"></div>
+<div class="seasonTabs">
+<button id="btn1" class="active" onclick="showSeason(1)">Season 1 • 23 Ep</button>
+<button id="btn2" class="inactive" onclick="showSeason(2)">Season 2 • 24 Ep</button>
+<button id="btn3" class="inactive" onclick="showSeason(3)">Season 3 • Original</button>
+</div>
 
-<!-- SEASON 2 -->
-<h3>Season 2 - Episodes 1 to 24</h3>
-<p class="note">✅ <b>Hindi Dub</b></p>
-<div class="grid" id="s2"></div>
+<div id="season1">
+<div class="secTitle">Season 1 - <span>Episodes 1 to 23</span></div>
+<p class="sub"><b>✅ Hindi Dub</b> - Tap karte hi upar Player me chalega!</p>
+<div class="epGrid" id="grid1"></div>
+</div>
 
-<!-- SEASON 3 -->
-<h3>Season 3 - Episodes 1 to 12</h3>
-<p class="note">⚠️ <b>Original</b> - Beech me PV aaye to Next dabana!</p>
-<div class="grid" id="s3"></div>
+<div id="season2" style="display:none">
+<div class="secTitle">Season 2 - <span>Episodes 1 to 24</span></div>
+<p class="sub"><b>✅ Hindi Dub</b> - Tap karte hi upar Player me chalega!</p>
+<div class="epGrid" id="grid2"></div>
+</div>
+
+<div id="season3" style="display:none">
+<div class="secTitle">Season 3 - <span>Coming Soon</span></div>
+<p class="sub">Original • Jaldi aayega!</p>
+<div class="epGrid" id="grid3"></div>
+</div>
+
+<p class="footer">V-ANIME © 2026 - Made with ❤️<br>All Videos from Official YouTube - Muse India</p>
 
 <script>
-const S12 = "PLpm1VVK4UL17_GoSaunqB9MFvvES607w7";
-const S3 = "PLwLSw1_eDZl1LMA6zhohDzfoV-XXFxS9Z";
+// YAHAN APNI PLAYLIST ID DALO - Purani wali hi dalna
+let PL1="PL_YAHAN_SEASON1_PLAYLIST_ID";
+let PL2="PL_YAHAN_SEASON2_PLAYLIST_ID";
+let PL3="PL_YAHAN_SEASON3_PLAYLIST_ID";
 
-function makeEpisodes(containerId, playlist, startIndex, count, seasonLabel, isS3){
-  let box = document.getElementById(containerId);
-  for(let i=1;i<=count;i++){
-    let btn = document.createElement('button');
-    btn.className = 'ep' + (isS3 ? ' s3' : '');
-    btn.innerHTML = `Episode ${i}<small>${seasonLabel}</small>`;
-    btn.onclick = () => playEpisode(playlist, startIndex + i - 1, `Season ${seasonLabel.includes('2')?'2':seasonLabel.includes('3')?'3':'1'} - Episode ${i}`, btn);
-    box.appendChild(btn);
-  }
+function makeGrid(gridId,total,pl){
+let g=document.getElementById(gridId);
+g.innerHTML="";
+for(let i=1;i<=total;i++){
+let b=document.createElement("div");
+b.className="epBtn";
+b.innerHTML="<b>"+i+"</b><small>Hindi Dub</small>";
+b.onclick=()=>playEpisode(i,pl,b);
+g.appendChild(b);
 }
-makeEpisodes('s1', S12, 1, 23, 'Hindi Dub', false);
-makeEpisodes('s2', S12, 24, 24, 'Season 2 • Hindi Dub', false);
-makeEpisodes('s3', S3, 1, 12, 'Season 3 • Original', true);
+}
+makeGrid("grid1",23,PL1);
+makeGrid("grid2",24,PL2);
+makeGrid("grid3",12,PL3);
 
-function playEpisode(playlist, index, title, btn){
-  document.querySelectorAll('.ep').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('playerBox').style.display='block';
-  document.getElementById('nowPlaying').style.display='block';
-  document.getElementById('nowText').innerText = title;
-  // Sirf usi Episode ko load karega, Playlist list nahi dikhayega
-  document.getElementById('player').src = `https://www.youtube.com/embed?listType=playlist&list=${playlist}&index=${index}&autoplay=1&rel=0`;
-  document.getElementById('playerBox').scrollIntoView({behavior:'smooth'});
+function playEpisode(num,pl,btn){
+document.querySelectorAll(".epBtn").forEach(e=>e.classList.remove("active"));
+btn.classList.add("active");
+document.getElementById("playerBox").style.display="block";
+document.getElementById("player").src="https://www.youtube.com/embed/videoseries?list="+pl+"&index="+num+"&autoplay=1";
+document.getElementById("now").innerText="Episode "+num+" - Hindi Dub chal raha hai...";
+document.getElementById("playerBox").scrollIntoView({behavior:"smooth"});
 }
 
+function showSeason(n){
+[1,2,3].forEach(i=>{
+document.getElementById("season"+i).style.display=(i==n?"block":"none");
+document.getElementById("btn"+i).className=(i==n?"active":"inactive");
+});
+}
 function filterEp(){
-  let q=document.getElementById('search').value.toLowerCase();
-  document.querySelectorAll('.ep').forEach(e=>{
-    e.style.display=e.textContent.toLowerCase().includes(q)?'block':'none';
-  });
+let q=document.getElementById("search").value;
+document.querySelectorAll(".epBtn").forEach(b=>{
+b.style.display=b.querySelector("b").innerText.includes(q)?"block":"none";
+});
 }
 </script>
 </body></html>
