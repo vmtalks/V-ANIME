@@ -1,123 +1,82 @@
 <!DOCTYPE html>
 <html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>V-ANIME - Hindi Dub Anime</title>
+<title>V-ANIME</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0f0f0f;color:#fff;font-family:Arial,sans-serif;padding:15px}
-.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.logo{font-size:26px;font-weight:900}
-.logo span{color:#ff4757}
-.logo small{display:block;font-size:11px;color:#aaa;font-weight:400;letter-spacing:1px}
-.searchBtn{background:#222;color:#fff;padding:8px 14px;border-radius:20px;font-size:14px;border:none}
-#search{width:100%;padding:13px;border-radius:12px;border:none;background:#222;color:#fff;font-size:15px;margin:12px 0;outline:none}
-.banner{background:linear-gradient(135deg,#ff4757,#ff6b00);padding:18px;border-radius:14px;margin-bottom:18px}
-.banner h2{font-size:20px;line-height:1.2}
-.banner p{font-size:13px;color:#ffe1e1;margin-top:5px;line-height:1.4}
-.banner b{color:#fff}
-.section{font-size:18px;color:#ff4757;margin:18px 0 10px;font-weight:bold}
+body{background:#0b0b14;color:#fff;font-family:Arial,sans-serif;padding:15px}
+.top{display:flex;align-items:center;justify-content:space-between}
+.logoBox{display:flex;align-items:center;gap:10px}
+.logoBox img{width:48px;height:48px;border-radius:12px;object-fit:cover;border:2px solid #8e2de2}
+.logoBox h1{font-size:24px;line-height:1}
+.logoBox h1 span{background:linear-gradient(135deg,#4a00e0,#8e2de2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.logoBox small{font-size:10px;color:#aaa;letter-spacing:2px}
+.upBtn{background:linear-gradient(135deg,#4a00e0,#8e2de2);color:#fff;border:none;padding:9px 16px;border-radius:20px;font-weight:bold}
+#search{width:100%;padding:13px;border-radius:12px;border:1px solid #333;background:#161626;color:#fff;font-size:15px;margin:14px 0;outline:none}
+.banner{background:linear-gradient(135deg,#4a00e0,#8e2de2,#1d2671);padding:20px;border-radius:16px;margin-bottom:18px}
+.banner h2{font-size:22px;line-height:1.2}
+.banner p{font-size:13px;color:#dcd0ff;margin-top:6px}
+.section{font-size:18px;margin:18px 0 10px;font-weight:bold}
+.section span{color:#8e2de2}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.card{background:#1e1e1e;border-radius:14px;overflow:hidden;text-decoration:none;color:#fff;display:block}
+.card{background:#1a1a2e;border:1px solid #2a2a4a;border-radius:16px;overflow:hidden;text-decoration:none;color:#fff;display:block}
 .card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
 .cardInfo{padding:10px}
-.cardInfo h3{font-size:15px;line-height:1.2}
+.cardInfo h3{font-size:15px}
 .cardInfo p{font-size:12px;color:#aaa;margin:4px 0}
-.badge{display:inline-block;font-size:11px;padding:3px 8px;border-radius:20px;margin-top:4px}
-.hindi{background:#ff4757;color:#fff}
-.original{background:#2a2a1e;color:#ffcc00;border:1px solid #ffcc00}
+.badge{display:inline-block;font-size:11px;padding:3px 9px;border-radius:20px;margin-top:4px}
+.hindi{background:linear-gradient(135deg,#4a00e0,#8e2de2);color:#fff}
 .new{background:#00c853;color:#fff}
-.footer{text-align:center;color:#555;font-size:12px;margin:25px 0 10px;line-height:1.5}
+.footer{text-align:center;color:#555;font-size:12px;margin:25px 0;line-height:1.5}
 </style></head><body>
 
-<div class="header">
-<div class="logo">V-<span>ANIME</span><small>HINDI DUB • FREE</small></div>
-<button class="searchBtn">🔍 Search</button>
+<div class="top">
+<div class="logoBox">
+<img src="logo.png">
+<div><h1>V-<span>ANIME</span></h1><small>HINDI DUB • FREE</small></div>
+</div>
+<button class="upBtn">+ Upload</button>
 </div>
 
-<input id="search" placeholder="Anime search karo... Mushoku, Naruto..." onkeyup="filterAnime()">
+<input id="search" placeholder="Search anime... Mushoku, Solo Leveling..." onkeyup="filterAnime()">
 
 <div class="banner">
 <h2>🔥 Mushoku Tensei<br>Ab Smart Player Me!</h2>
-<p>Tap karo, <b>yahi pe chalega!</b> Playlist nahi khulegi!<br>Season 1 + 2 Hindi Dub • Season 3 Original</p>
+<p>Tap karo, yahi pe chalega! Playlist nahi khulegi!</p>
 </div>
 
-<div class="section">Trending Now 🔥</div>
+<div class="section">Trending Now <span>🔥</span></div>
 <div class="grid" id="animeGrid">
 
 <a class="card" href="mushoku.html">
 <img src="https://cdn.myanimelist.net/images/anime/1530/117776.jpg">
-<div class="cardInfo">
-<h3>Mushoku Tensei</h3>
-<p>Jobless Reincarnation</p>
-<span class="badge hindi">Hindi Dub</span> <span class="badge new">NEW PLAYER</span>
-</div>
+<div class="cardInfo"><h3>Mushoku Tensei</h3><p>Jobless Reincarnation</p><span class="badge hindi">Hindi Dub</span> <span class="badge new">NEW</span></div>
 </a>
 
 <a class="card" href="shangrila.html">
 <img src="https://cdn.myanimelist.net/images/anime/1957/140699.jpg">
-<div class="cardInfo">
-<h3>Shangri-La Frontier</h3>
-<p>Season 1 + 2</p>
-<span class="badge hindi">Hindi Dub</span>
-</div>
-</a>
-
-<a class="card" href="naruto.html">
-<img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
-<div class="cardInfo">
-<h3>Naruto</h3>
-<p>Complete Series</p>
-<span class="badge hindi">Hindi Dub</span>
-</div>
-</a>
-
-<a class="card" href="onepiece.html">
-<img src="https://cdn.myanimelist.net/images/anime/6/73245.jpg">
-<div class="cardInfo">
-<h3>One Piece</h3>
-<p>Ongoing</p>
-<span class="badge hindi">Hindi Dub</span>
-</div>
+<div class="cardInfo"><h3>Shangri-La Frontier</h3><p>Season 1 + 2</p><span class="badge hindi">Hindi Dub</span></div>
 </a>
 
 <a class="card" href="sololeveling.html">
 <img src="https://cdn.myanimelist.net/images/anime/1923/141703.jpg">
-<div class="cardInfo">
-<h3>Solo Leveling</h3>
-<p>Season 1 + 2</p>
-<span class="badge hindi">Hindi Dub</span>
-</div>
+<div class="cardInfo"><h3>Solo Leveling</h3><p>Season 1 + 2</p><span class="badge hindi">Hindi Dub</span></div>
 </a>
 
-<a class="card" href="demonslayer.html">
-<img src="https://cdn.myanimelist.net/images/anime/1286/99889.jpg">
-<div class="cardInfo">
-<h3>Demon Slayer</h3>
-<p>Kimetsu no Yaiba</p>
-<span class="badge hindi">Hindi Dub</span>
-</div>
-</a>
-
-</div>
-
-<div class="section">Coming Soon ⏳</div>
-<div class="grid">
-<a class="card" href="#">
-<img src="https://cdn.myanimelist.net/images/anime/1013/147559.jpg">
-<div class="cardInfo">
-<h3>Jujutsu Kaisen</h3>
-<p>Season 3 Coming Soon</p>
-<span class="badge original">Original</span>
-</div>
-</a>
-
-<a class="card" href="#">
+<a class="card" href="jjk.html">
 <img src="https://cdn.myanimelist.net/images/anime/1457/148299.jpg">
-<div class="cardInfo">
-<h3>Attack on Titan</h3>
-<p>Complete</p>
-<span class="badge original">Original</span>
-</div>
+<div class="cardInfo"><h3>Jujutsu Kaisen</h3><p>Season 1 + 2</p><span class="badge hindi">Hindi Dub</span></div>
 </a>
+
+<a class="card" href="naruto.html">
+<img src="https://cdn.myanimelist.net/images/anime/1141/142503.jpg">
+<div class="cardInfo"><h3>Naruto</h3><p>Complete Series</p><span class="badge hindi">Hindi Dub</span></div>
+</a>
+
+<a class="card" href="onepiece.html">
+<img src="https://cdn.myanimelist.net/images/anime/6/73245.jpg">
+<div class="cardInfo"><h3>One Piece</h3><p>Ongoing</p><span class="badge hindi">Hindi Dub</span></div>
+</a>
+
 </div>
 
 <p class="footer">V-ANIME • Made for Indian Anime Fans 🇮🇳<br>All Videos from Official YouTube - Muse India</p>
