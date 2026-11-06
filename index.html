@@ -1,84 +1,38 @@
-<!DOCTYPE html>
-<html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>V-ANIME</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#0a0a0f;color:#fff;padding:14px}
-.top{display:flex;align-items:center;gap:8px}
-.top img{width:40px;height:40px;border-radius:50%;border:2px solid #a855f7;object-fit:cover}
-.top h1{font-size:22px}.top h1 span{color:#a855f7}
-#search{width:100%;padding:12px;border-radius:12px;border:none;background:#22222e;color:#fff;margin:14px 0;outline:none}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.card{background:#1a1a24;border-radius:14px;overflow:hidden;text-decoration:none;color:#fff;border:1px solid #2a2a3a}
-.card img{width:100%;height:180px;object-fit:cover}
-.card div{padding:10px}
-.card b{font-size:14px;display:block}
-.card span{font-size:12px;color:#a855f7}
-.footer{text-align:center;color:#555;font-size:12px;margin:25px 0}
-</style></head><body>
+<!DOCTYPE html><html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>V-ANIME</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:#0a0a0f;color:#fff;padding:14px}.top{display:flex;align-items:center;gap:12px}.top img{width:62px;height:62px;border-radius:50%;border:3px solid #a855f7;object-fit:cover}.top h1{font-size:30px}.top h1 span{color:#a855f7}#s{width:100%;padding:12px;border-radius:12px;border:none;background:#22222e;color:#fff;margin:14px 0;outline:none}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.card{background:#1a1a24;border-radius:14px;overflow:hidden;text-decoration:none;color:#fff;border:1px solid #2a2a3a;position:relative}.card img{width:100%;height:200px;object-fit:cover;background:#222}.card div{padding:10px}.card b{font-size:15px;display:block}.card span{font-size:12px;color:#a855f7}.soon{position:absolute;top:8px;right:8px;background:#facc15;color:#000;font-size:11px;font-weight:bold;padding:5px 9px;border-radius:20px}.soon-card{opacity:.6}.soon-card img{filter:grayscale(1)}.f{text-align:center;color:#555;font-size:12px;margin:25px 0}</style></head><body>
 <div class="top"><img src="IMG-20261106-WA6885.jpg"><h1>V-<span>ANIME</span></h1></div>
-<input id="search" placeholder="Anime search karo..." onkeyup="f()">
-<div class="grid" id="list"></div>
-<p class="footer">V-ANIME © 2026 - 49 Anime • Hindi Dub</p>
+<input id="s" placeholder="Anime search karo..." onkeyup="f()">
+<div class="grid" id="list"></div><p class="f">V-ANIME © 2026 - 48 LIVE + 4 Coming Soon • Hindi Dub</p>
 <script>
 let A=[
-["Mushoku Tensei","Mushoku Tensei Hindi Dub","https://cdn.myanimelist.net/images/anime/1530/117776.jpg","PLpm1VVK4UL17_GoSaunqB9MFvvES607w7",47],
-["Solo Leveling","Solo Leveling Hindi Dub","https://cdn.myanimelist.net/images/anime/1923/147767.jpg","SEARCH",25],
-["Naruto","Naruto Hindi Dub","https://cdn.myanimelist.net/images/anime/1141/142503.jpg","SEARCH",220],
-["One Piece","One Piece Hindi Dub","https://cdn.myanimelist.net/images/anime/6/73245.jpg","SEARCH",100],
-["Demon Slayer","Demon Slayer Hindi Dub","https://cdn.myanimelist.net/images/anime/1286/99889.jpg","SEARCH",55],
-["Jujutsu Kaisen","Jujutsu Kaisen Hindi Dub","https://cdn.myanimelist.net/images/anime/1171/109222.jpg","SEARCH",47],
-["Attack on Titan","Attack on Titan Hindi Dub","https://cdn.myanimelist.net/images/anime/10/47347.jpg","SEARCH",89],
-["Death Note","Death Note Hindi Dub","https://cdn.myanimelist.net/images/anime/9/9453.jpg","SEARCH",37],
-["Dragon Ball Z","Dragon Ball Z Hindi Dub","https://cdn.myanimelist.net/images/anime/1274/109687.jpg","SEARCH",291],
-["Black Clover","Black Clover Hindi Dub","https://cdn.myanimelist.net/images/anime/2/88304.jpg","SEARCH",170],
-["My Hero Academia","My Hero Academia Hindi Dub","https://cdn.myanimelist.net/images/anime/10/78745.jpg","SEARCH",138],
-["Spy x Family","Spy x Family Hindi Dub","https://cdn.myanimelist.net/images/anime/1446/124151.jpg","SEARCH",37],
-["Chainsaw Man","Chainsaw Man Hindi Dub","https://cdn.myanimelist.net/images/anime/1806/126216.jpg","SEARCH",12],
-["One Punch Man","One Punch Man Hindi Dub","https://cdn.myanimelist.net/images/anime/12/76049.jpg","SEARCH",24],
-["Tokyo Revengers","Tokyo Revengers Hindi Dub","https://cdn.myanimelist.net/images/anime/96/110320.jpg","SEARCH",50],
-["Hunter x Hunter","Hunter x Hunter Hindi Dub","https://cdn.myanimelist.net/images/anime/11/33657.jpg","SEARCH",148],
-["Bleach","Bleach Hindi Dub","https://cdn.myanimelist.net/images/anime/3/40451.jpg","SEARCH",366],
-["Fairy Tail","Fairy Tail Hindi Dub","https://cdn.myanimelist.net/images/anime/5/18179.jpg","SEARCH",328],
-["Re:Zero","Re Zero Hindi Dub","https://cdn.myanimelist.net/images/anime/1525/128761.jpg","SEARCH",50],
-["Overlord","Overlord Hindi Dub","https://cdn.myanimelist.net/images/anime/1530/117776.jpg","SEARCH",52],
-["Sword Art Online","Sword Art Online Hindi Dub","https://cdn.myanimelist.net/images/anime/11/39717.jpg","SEARCH",96],
-["Vinland Saga","Vinland Saga Hindi Dub","https://cdn.myanimelist.net/images/anime/1500/110718.jpg","SEARCH",48],
-["Mob Psycho 100","Mob Psycho Hindi Dub","https://cdn.myanimelist.net/images/anime/8/80356.jpg","SEARCH",37],
-["Dr Stone","Dr Stone Hindi Dub","https://cdn.myanimelist.net/images/anime/1614/101749.jpg","SEARCH",57],
-["Fire Force","Fire Force Hindi Dub","https://cdn.myanimelist.net/images/anime/1284/100388.jpg","SEARCH",48],
-["Haikyuu","Haikyuu Hindi Dub","https://cdn.myanimelist.net/images/anime/10/113663.jpg","SEARCH",85],
-["Blue Lock","Blue Lock Hindi Dub","https://cdn.myanimelist.net/images/anime/1443/122543.jpg","SEARCH",24],
-["Kaiju No 8","Kaiju No 8 Hindi Dub","https://cdn.myanimelist.net/images/anime/1542/140496.jpg","SEARCH",23],
-["Dandadan","Dandadan Hindi Dub","https://cdn.myanimelist.net/images/anime/1589/141552.jpg","SEARCH",24],
-["Frieren","Frieren Hindi Dub","https://cdn.myanimelist.net/images/anime/1015/138006.jpg","SEARCH",28],
-["Mashle","Mashle Hindi Dub","https://cdn.myanimelist.net/images/anime/1461/126091.jpg","SEARCH",24],
-["Classroom of Elite","Classroom of Elite Hindi Dub","https://cdn.myanimelist.net/images/anime/1717/123922.jpg","SEARCH",38],
-["Shield Hero","Shield Hero Hindi Dub","https://cdn.myanimelist.net/images/anime/1529/117746.jpg","SEARCH",50],
-["That Time I Got Reincarnated","Slime Hindi Dub","https://cdn.myanimelist.net/images/anime/1694/117398.jpg","SEARCH",48],
-["Seven Deadly Sins","Seven Deadly Sins Hindi Dub","https://cdn.myanimelist.net/images/anime/8/65409.jpg","SEARCH",100],
-["Boruto","Boruto Hindi Dub","https://cdn.myanimelist.net/images/anime/1090/120404.jpg","SEARCH",293],
-["Pokemon","Pokemon Hindi Dub","https://cdn.myanimelist.net/images/anime/1208/94745.jpg","SEARCH",100],
-["Beyblade","Beyblade Hindi Dub","https://cdn.myanimelist.net/images/anime/1167/108000.jpg","SEARCH",51],
-["Doraemon","Doraemon Hindi Dub","https://cdn.myanimelist.net/images/anime/1498/134065.jpg","SEARCH",100],
-["Shinchan","Shinchan Hindi Dub","https://cdn.myanimelist.net/images/anime/1487/116808.jpg","SEARCH",100],
-["Kaguya Sama","Kaguya Sama Hindi Dub","https://cdn.myanimelist.net/images/anime/1295/106551.jpg","SEARCH",37],
-["Horimiya","Horimiya Hindi Dub","https://cdn.myanimelist.net/images/anime/1694/123078.jpg","SEARCH",13],
-["Your Name","Your Name Hindi Dub","https://cdn.myanimelist.net/images/anime/5/87048.jpg","SEARCH",1],
-["A Silent Voice","A Silent Voice Hindi Dub","https://cdn.myanimelist.net/images/anime/6/91891.jpg","SEARCH",1],
-["Weathering With You","Weathering With You Hindi Dub","https://cdn.myanimelist.net/images/anime/5/106613.jpg","SEARCH",1],
-["Suzume","Suzume Hindi Dub","https://cdn.myanimelist.net/images/anime/1530/134713.jpg","SEARCH",1],
-["Lookism","Lookism Hindi Dub","https://cdn.myanimelist.net/images/anime/1510/128408.jpg","SEARCH",8],
-["Tower of God","Tower of God Hindi Dub","https://cdn.myanimelist.net/images/anime/1130/120208.jpg","SEARCH",26],
-["God of High School","God of High School Hindi Dub","https://cdn.myanimelist.net/images/anime/1592/119436.jpg","SEARCH",13]
+["Spy x Family S1",25,"1446/124151.jpg",0],["Spy x Family S2",12,"1446/124151.jpg",0],["Spy x Family Code White",1,"1446/124151.jpg",0],
+["Mushoku Tensei S1",23,"1530/117776.jpg",0],["Mushoku Tensei S2",24,"1530/117776.jpg",0],
+["ReZero S1",25,"1525/128761.jpg",0],["ReZero S3",16,"1525/128761.jpg",0],
+["Attack on Titan",89,"10/47347.jpg",0],["Hunter x Hunter",148,"11/33657.jpg",0],["Demon Slayer S1",26,"1286/99889.jpg",0],
+["One Punch Man S1",12,"12/76049.jpg",0],["Mob Psycho 100 S1",12,"8/80356.jpg",0],["Assassination Classroom",47,"9/9448.jpg",0],
+["Tokyo Revengers S1",24,"96/110320.jpg",0],["Fairy Tail S1",48,"5/18179.jpg",0],["DAN DA DAN S1",12,"1589/141552.jpg",0],
+["JoJo Phantom Blood",9,"3/36033.jpg",0],["JoJo Battle Tendency",17,"3/36033.jpg",0],["JoJo Stardust Crusaders",48,"3/36033.jpg",0],
+["JoJo Diamond Is Unbreakable",39,"3/36033.jpg",0],["JoJo Golden Wind",39,"3/36033.jpg",0],["God of High School",13,"1592/119436.jpg",0],
+["Goblin Slayer S1",12,"1127/101615.jpg",0],["Sword Art Online",25,"11/39717.jpg",0],["Slime",24,"1694/117398.jpg",0],
+["Zom 100",12,"1542/140496.jpg",0],["Kaguya-sama",12,"1295/106551.jpg",0],["Classroom of Elite",25,"1717/123922.jpg",0],
+["Detective Is Already Dead",12,"1694/123078.jpg",0],["Cells at Work",21,"10/78745.jpg",0],["Cells at Work Code Black",13,"10/78745.jpg",0],
+["My Dress-Up Darling",12,"1694/123078.jpg",0],["Skeleton Knight",12,"1592/119436.jpg",0],["I Parry Everything",12,"1542/140496.jpg",0],
+["Appraiser Class",12,"1542/140496.jpg",0],["Reborn to Master Blade",12,"1542/140496.jpg",0],["Million Lives",12,"1542/140496.jpg",0],
+["Iruma-kun S2",21,"1542/140496.jpg",0],["BOFURI",12,"1542/140496.jpg",0],["Fire Force",24,"1284/100388.jpg",0],
+["Ragna Crimson",24,"1542/140496.jpg",0],["Trapped in Dating Sim",12,"1542/140496.jpg",0],["Faraway Paladin",12,"1542/140496.jpg",0],
+["My Instant Death Ability",12,"1542/140496.jpg",0],["Chained Soldier",12,"1542/140496.jpg",0],["BanG Dream",13,"1542/140496.jpg",0],
+["Jujutsu Kaisen S1",24,"1171/109222.jpg",0],["Jujutsu Kaisen S2",23,"1171/109222.jpg",0],
+// COMING SOON - Abhi Upload Nahi Hue
+["Bleach (2004)",0,"3/40451.jpg",1],["Kuroko's Basketball",0,"10/113663.jpg",1],["Oshi no Ko",0,"1015/138006.jpg",1],["KonoSuba",0,"1529/117746.jpg",1]
 ];
 let box=document.getElementById("list");
 A.forEach((a,i)=>{
-box.innerHTML+=`<a class="card" href="watch.html?id=${i}"><img src="${a[2]}"><div><b>${a[0]}</b><span>▶ Hindi Dub • ${a[4]} Ep</span></div></a>`;
-});
-function f(){
-let q=document.getElementById("search").value.toLowerCase();
-document.querySelectorAll(".card").forEach(c=>{c.style.display=c.textContent.toLowerCase().includes(q)?"block":"none"});
+let img="https://images.weserv.nl/?url=cdn.myanimelist.net/images/anime/"+a[2]+"&w=400&h=550&fit=cover";
+if(a[3]==1){
+box.innerHTML+=`<div class="card soon-card"><span class="soon">COMING SOON</span><img src="${img}" onerror="this.src='https://cdn.myanimelist.net/images/anime/${a[2]}'"><div><b>${a[0]}</b><span>⏳ Aane Wala Hai</span></div></div>`;
+}else{
+box.innerHTML+=`<a class="card" href="watch.html?id=${i}"><img src="${img}" onerror="this.src='https://cdn.myanimelist.net/images/anime/${a[2]}'"><div><b>${a[0]}</b><span>▶ Hindi Dub • ${a[1]} Ep</span></div></a>`;
 }
-</script>
-</body></html>
+});
+function f(){let q=document.getElementById("s").value.toLowerCase();document.querySelectorAll(".card").forEach(c=>{c.style.display=c.textContent.toLowerCase().includes(q)?"block":"none"});}
+</script></body></html>
