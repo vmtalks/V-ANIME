@@ -26,10 +26,9 @@ body{background:#0a0a0f;color:#fff;padding:14px}
 .secTitle span{color:#a855f7}
 .sub{font-size:13px;color:#aaa;margin-bottom:12px}
 .sub b{color:#a855f7}
-/* YE WALA CIRCLE KIYA HUA STYLE */
 .epGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .epBtn{background:#1a1a24;border:1px solid #2a2a3a;border-radius:12px;padding:12px 4px;text-align:center;cursor:pointer;color:#fff}
-.epBtn:active,.epBtn.active{background:#a855f7;border-color:#a855f7}
+.epBtn.active{background:#a855f7;border-color:#a855f7}
 .epBtn b{display:block;font-size:20px;line-height:1}
 .epBtn small{font-size:11px;color:#aaa}
 .epBtn.active small{color:#fff}
@@ -46,66 +45,62 @@ body{background:#0a0a0f;color:#fff;padding:14px}
 <div><h2>Mushoku Tensei</h2><p><b>Jobless Reincarnation • Hindi Dub</b><br>Isekai • Fantasy • Action<br>Tap karo, yahin chalega!</p></div>
 </div>
 
-<div id="playerBox"><iframe id="player" src="" allowfullscreen></iframe><div id="now">Episode 1 - Hindi Dub chal raha hai...</div></div>
+<div id="playerBox"><iframe id="player" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe><div id="now">Episode 1 chal raha hai...</div></div>
 
 <input id="search" placeholder="Episode search karo... 1, 5, 12..." onkeyup="filterEp()">
 
 <div class="seasonTabs">
 <button id="btn1" class="active" onclick="showSeason(1)">Season 1 • 23 Ep</button>
 <button id="btn2" class="inactive" onclick="showSeason(2)">Season 2 • 24 Ep</button>
-<button id="btn3" class="inactive" onclick="showSeason(3)">Season 3 • Original</button>
+<button id="btn3" class="inactive" onclick="showSeason(3)">Season 3 • Original Dub</button>
 </div>
 
-<div id="season1">
-<div class="secTitle">Season 1 - <span>Episodes 1 to 23</span></div>
-<p class="sub"><b>✅ Hindi Dub</b> - Tap karte hi upar Player me chalega!</p>
-<div class="epGrid" id="grid1"></div>
-</div>
-
-<div id="season2" style="display:none">
-<div class="secTitle">Season 2 - <span>Episodes 1 to 24</span></div>
-<p class="sub"><b>✅ Hindi Dub</b> - Tap karte hi upar Player me chalega!</p>
-<div class="epGrid" id="grid2"></div>
-</div>
-
-<div id="season3" style="display:none">
-<div class="secTitle">Season 3 - <span>Coming Soon</span></div>
-<p class="sub">Original • Jaldi aayega!</p>
-<div class="epGrid" id="grid3"></div>
-</div>
+<div id="season1"><div class="secTitle">Season 1 - <span>Episodes 1 to 23</span></div><p class="sub"><b>✅ Hindi Dub</b> - Tap karte hi upar Player me chalega!</p><div class="epGrid" id="grid1"></div></div>
+<div id="season2" style="display:none"><div class="secTitle">Season 2 - <span>Episodes 1 to 24</span></div><p class="sub"><b>✅ Hindi Dub</b> - Tap karte hi upar Player me chalega!</p><div class="epGrid" id="grid2"></div></div>
+<div id="season3" style="display:none"><div class="secTitle">Season 3 - <span>Original Dub</span></div><p class="sub"><b>🔥 Original Dub</b> - Hindi Dub nahi, Original Audio me!</p><div class="epGrid" id="grid3"></div></div>
 
 <p class="footer">V-ANIME © 2026 - Made with ❤️<br>All Videos from Official YouTube - Muse India</p>
 
 <script>
-// YAHAN APNI PLAYLIST ID DALO - Purani wali hi dalna
-let PL1="PL_YAHAN_SEASON1_PLAYLIST_ID";
-let PL2="PL_YAHAN_SEASON2_PLAYLIST_ID";
-let PL3="PL_YAHAN_SEASON3_PLAYLIST_ID";
+// ==== YAHAN SIRF VIDEO ID DALNI HAI, PURA LINK NAHI ====
+// Example: https://youtu.be/ABC123XYZ  =>  Sirf ABC123XYZ dalo
+// Muse India ke video ka link kholo, ?v= ke baad wala part hi ID hai
 
-function makeGrid(gridId,total,pl){
-let g=document.getElementById(gridId);
-g.innerHTML="";
-for(let i=1;i<=total;i++){
-let b=document.createElement("div");
-b.className="epBtn";
-b.innerHTML="<b>"+i+"</b><small>Hindi Dub</small>";
-b.onclick=()=>playEpisode(i,pl,b);
+let S1 = [
+"VIDEO_ID_1","VIDEO_ID_2","VIDEO_ID_3","VIDEO_ID_4","VIDEO_ID_5","VIDEO_ID_6","VIDEO_ID_7","VIDEO_ID_8","VIDEO_ID_9","VIDEO_ID_10","VIDEO_ID_11","VIDEO_ID_12","VIDEO_ID_13","VIDEO_ID_14","VIDEO_ID_15","VIDEO_ID_16","VIDEO_ID_17","VIDEO_ID_18","VIDEO_ID_19","VIDEO_ID_20","VIDEO_ID_21","VIDEO_ID_22","VIDEO_ID_23"
+];
+let S2 = [
+"VIDEO_ID_1","VIDEO_ID_2","VIDEO_ID_3","VIDEO_ID_4","VIDEO_ID_5","VIDEO_ID_6","VIDEO_ID_7","VIDEO_ID_8","VIDEO_ID_9","VIDEO_ID_10","VIDEO_ID_11","VIDEO_ID_12","VIDEO_ID_13","VIDEO_ID_14","VIDEO_ID_15","VIDEO_ID_16","VIDEO_ID_17","VIDEO_ID_18","VIDEO_ID_19","VIDEO_ID_20","VIDEO_ID_21","VIDEO_ID_22","VIDEO_ID_23","VIDEO_ID_24"
+];
+let S3 = [
+"VIDEO_ID_1","VIDEO_ID_2","VIDEO_ID_3","VIDEO_ID_4","VIDEO_ID_5","VIDEO_ID_6","VIDEO_ID_7","VIDEO_ID_8","VIDEO_ID_9","VIDEO_ID_10","VIDEO_ID_11","VIDEO_ID_12"
+];
+
+function makeGrid(gridId, list, label, season){
+let g=document.getElementById(gridId); g.innerHTML="";
+list.forEach((vid,i)=>{
+let b=document.createElement("div"); b.className="epBtn";
+b.innerHTML="<b>"+(i+1)+"</b><small>"+label+"</small>";
+b.onclick=()=>playEpisode(vid, (i+1), label, season, b);
 g.appendChild(b);
+});
 }
-}
-makeGrid("grid1",23,PL1);
-makeGrid("grid2",24,PL2);
-makeGrid("grid3",12,PL3);
+makeGrid("grid1", S1, "Hindi Dub", 1);
+makeGrid("grid2", S2, "Hindi Dub", 2);
+makeGrid("grid3", S3, "Original Dub", 3);
 
-function playEpisode(num,pl,btn){
+function playEpisode(vid, num, label, season, btn){
+if(!vid || vid.includes("VIDEO_ID")){
+alert("Bhai, is Episode ki Video ID abhi dali nahi hai! Upar S"+season+" wali list me VIDEO_ID_"+num+" ki jagah asli YouTube ID dalo.");
+return;
+}
 document.querySelectorAll(".epBtn").forEach(e=>e.classList.remove("active"));
 btn.classList.add("active");
 document.getElementById("playerBox").style.display="block";
-document.getElementById("player").src="https://www.youtube.com/embed/videoseries?list="+pl+"&index="+num+"&autoplay=1";
-document.getElementById("now").innerText="Episode "+num+" - Hindi Dub chal raha hai...";
+document.getElementById("player").src="https://www.youtube.com/embed/"+vid+"?autoplay=1&rel=0";
+document.getElementById("now").innerText="Season "+season+" • Episode "+num+" - "+label+" chal raha hai...";
 document.getElementById("playerBox").scrollIntoView({behavior:"smooth"});
 }
-
 function showSeason(n){
 [1,2,3].forEach(i=>{
 document.getElementById("season"+i).style.display=(i==n?"block":"none");
