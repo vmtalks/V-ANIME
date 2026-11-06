@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mushoku Tensei - Hindi Dub | V-ANIME</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f0f0f;color:#fff;font-family:Arial,sans-serif;padding:15px}
+.back{display:inline-block;background:#222;color:#fff;padding:8px 14px;border-radius:20px;text-decoration:none;font-size:14px}
+.top{display:flex;gap:15px;margin:15px 0}
+.top img{width:140px;border-radius:12px}
+.top h2{font-size:22px}
+.top p{color:#ff4757;font-size:13px;margin:6px 0}
+.top span{color:#aaa;font-size:13px;line-height:1.4;display:block}
+#playerBox{display:none;margin:10px 0}
+#player{width:100%;aspect-ratio:16/9;border:none;border-radius:12px}
+#nowPlaying{background:#1e1e1e;padding:10px;border-radius:10px;font-size:14px;margin-bottom:10px;display:none}
+#nowPlaying b{color:#ff4757}
+#search{width:100%;padding:12px;border-radius:10px;border:none;background:#222;color:#fff;font-size:15px;margin:10px 0;outline:none}
+h3{margin:18px 0 5px;color:#ff4757;font-size:18px}
+.note{color:#aaa;font-size:13px;margin-bottom:10px;line-height:1.5}
+.note b{color:#ffcc00}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.ep{background:#1e1e1e;color:#fff;padding:13px 5px;text-align:center;border-radius:10px;font-weight:bold;font-size:14px;display:block;border:none;width:100%;cursor:pointer}
+.ep:hover,.ep.active{background:#ff4757}
+.ep small{display:block;font-size:11px;color:#ddd;font-weight:normal;margin-top:2px}
+.ep.s3{background:#2a2a1e;border:1px solid #ffcc00}
+</style></head><body>
+
+<a class="back" href="index.html">⬅ Back to Home</a>
+
+<div class="top">
+<img src="https://cdn.myanimelist.net/images/anime/1530/117776.jpg">
+<div>
+<h2>Mushoku Tensei</h2>
+<p>Jobless Reincarnation • Hindi Dub</p>
+<span>Isekai • Fantasy • Action<br>Tap karo, yahin chalega!</span>
+</div>
+</div>
+
+<div id="nowPlaying">▶ Ab Chal Raha Hai: <b id="nowText">Episode 1</b></div>
+<div id="playerBox"><iframe id="player" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe></div>
+
+<input id="search" placeholder="Episode search karo... 1, 5, 12..." onkeyup="filterEp()">
+
+<!-- SEASON 1 -->
+<h3>Season 1 - Episodes 1 to 23</h3>
+<p class="note">✅ <b>Hindi Dub</b> - Tap karte hi upar Player me chalega!</p>
+<div class="grid" id="s1"></div>
+
+<!-- SEASON 2 -->
+<h3>Season 2 - Episodes 1 to 24</h3>
+<p class="note">✅ <b>Hindi Dub</b></p>
+<div class="grid" id="s2"></div>
+
+<!-- SEASON 3 -->
+<h3>Season 3 - Episodes 1 to 12</h3>
+<p class="note">⚠️ <b>Original</b> - Beech me PV aaye to Next dabana!</p>
+<div class="grid" id="s3"></div>
+
+<script>
+const S12 = "PLpm1VVK4UL17_GoSaunqB9MFvvES607w7";
+const S3 = "PLwLSw1_eDZl1LMA6zhohDzfoV-XXFxS9Z";
+
+function makeEpisodes(containerId, playlist, startIndex, count, seasonLabel, isS3){
+  let box = document.getElementById(containerId);
+  for(let i=1;i<=count;i++){
+    let btn = document.createElement('button');
+    btn.className = 'ep' + (isS3 ? ' s3' : '');
+    btn.innerHTML = `Episode ${i}<small>${seasonLabel}</small>`;
+    btn.onclick = () => playEpisode(playlist, startIndex + i - 1, `Season ${seasonLabel.includes('2')?'2':seasonLabel.includes('3')?'3':'1'} - Episode ${i}`, btn);
+    box.appendChild(btn);
+  }
+}
+makeEpisodes('s1', S12, 1, 23, 'Hindi Dub', false);
+makeEpisodes('s2', S12, 24, 24, 'Season 2 • Hindi Dub', false);
+makeEpisodes('s3', S3, 1, 12, 'Season 3 • Original', true);
+
+function playEpisode(playlist, index, title, btn){
+  document.querySelectorAll('.ep').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('playerBox').style.display='block';
+  document.getElementById('nowPlaying').style.display='block';
+  document.getElementById('nowText').innerText = title;
+  // Sirf usi Episode ko load karega, Playlist list nahi dikhayega
+  document.getElementById('player').src = `https://www.youtube.com/embed?listType=playlist&list=${playlist}&index=${index}&autoplay=1&rel=0`;
+  document.getElementById('playerBox').scrollIntoView({behavior:'smooth'});
+}
+
+function filterEp(){
+  let q=document.getElementById('search').value.toLowerCase();
+  document.querySelectorAll('.ep').forEach(e=>{
+    e.style.display=e.textContent.toLowerCase().includes(q)?'block':'none';
+  });
+}
+</script>
+</body></html>
