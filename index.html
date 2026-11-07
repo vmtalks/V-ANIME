@@ -7,36 +7,37 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#0a0a0f;color:#fff}
-header{position:sticky;top:0;z-index:99;background:#0a0a0f;padding:12px 14px;display:flex;align-items:center;gap:10px}
-.logo-img{width:48px;height:48px;border-radius:50%;border:2px solid #a855f7;object-fit:cover;box-shadow:0 0 15px #a855f7}
-.logo-text{font-size:26px;font-weight:900;letter-spacing:1px}
-.logo-text span{color:#a855f7}
+header{position:sticky;top:0;z-index:99;background:#0a0a0f;padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #222}
+/* LOGO - AB LINK PE NAHI, ANDAR HI BANA HAI, HAMESHA DIKHEGA */
+.logo-box{width:48px;height:48px;min-width:48px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#6d28d9);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;border:2px solid #a855f7;box-shadow:0 0 15px #a855f7}
+.hero-logo-box{width:130px;height:130px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#6d28d9);display:flex;align-items:center;justify-content:center;font-size:55px;font-weight:900;color:#fff;border:3px solid #a855f7;box-shadow:0 0 35px #a855f7;margin:0 auto}
+.logo-text{font-size:26px;font-weight:900}.logo-text span{color:#a855f7}
 #searchInput{flex:1;padding:10px 14px;border-radius:20px;border:none;background:#1e1e26;color:#fff;outline:none;margin-left:10px}
 .hero{text-align:center;padding:20px 14px 6px}
-.hero-logo{width:130px;height:130px;border-radius:50%;border:3px solid #a855f7;object-fit:cover;box-shadow:0 0 35px #a855f7;margin:0 auto}
 .hero h1{font-size:34px;margin-top:14px}.hero h1 span{color:#a855f7}
 .hero p{color:#aaa;margin-top:8px;font-size:14px}
-.trending{padding:14px}
-.trending h2{font-size:24px;margin-bottom:12px}
+.trending{padding:14px}.trending h2{font-size:24px;margin-bottom:12px}
 #animeList{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .card{background:#15151d;border-radius:16px;overflow:hidden;border:1px solid #222}
 .card img{width:100%;height:220px;object-fit:cover;display:block;background:#222}
-.card-body{padding:12px}
-.card-body h3{font-size:17px;line-height:1.2}
-.card-body p{font-size:13px;color:#aaa;margin:5px 0 10px}
+.card-body{padding:12px}.card-body h3{font-size:16px;line-height:1.2}
+.card-body p{font-size:12px;color:#aaa;margin:5px 0 10px}
 .watch-btn{width:100%;padding:10px;background:#a855f7;color:#fff;border:none;border-radius:20px;font-weight:700;font-size:14px;cursor:pointer}
-.detail{background:#0a0a0f;padding:10px;display:none}
-.detail.show{display:block}
-.season-bar{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}
-.season-bar button{padding:6px 12px;border-radius:20px;border:1px solid #444;background:#222;color:#fff;font-size:12px}
-.season-bar button.active{background:#fff;color:#000;font-weight:700}
-.ep-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.ep-grid button{padding:9px 0;background:#2a2a2a;border:1px solid #333;color:#fff;border-radius:8px;font-size:12px}
-.ep-grid button.active{border:2px solid #a855f7 !important}
-.player{margin:10px 0;border-radius:10px;overflow:hidden;background:#000}
-.player iframe{width:100%;height:220px;border:none;display:block}
+/* ALAG PAGE */
+#detailPage{display:none;padding:12px}
+.back-btn{display:inline-block;background:#222;color:#fff;padding:9px 16px;border-radius:20px;border:none;font-size:14px;cursor:pointer}
+.detail-top{display:flex;gap:14px;margin:14px 0;align-items:center}
+.detail-top .d-poster{width:120px;height:170px;border-radius:12px;background:#222;display:flex;align-items:center;justify-content:center;font-size:14px;text-align:center;padding:8px;color:#aaa}
+.detail-top h2{font-size:22px;line-height:1.2}.detail-top p{color:#a855f7;font-size:13px;margin:6px 0}
+.player{margin:10px 0;border-radius:12px;overflow:hidden;background:#000}
+.player iframe{width:100%;height:230px;border:none;display:block}
 .player-msg{padding:12px;text-align:center;font-size:12px;color:#aaa}
-.direct-box{background:#222;padding:10px;border-radius:10px;font-size:12px;line-height:1.6}
+.now-playing{background:#1e1e1e;padding:10px;border-radius:10px;font-size:14px;margin-bottom:10px;display:none}
+.now-playing b{color:#a855f7}
+.ep-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.ep-grid button{padding:11px 0;background:#2a2a2a;border:1px solid #333;color:#fff;border-radius:8px;font-size:13px}
+.ep-grid button.active{border:2px solid #a855f7 !important;background:#a855f7}
+.direct-box{background:#222;padding:12px;border-radius:10px;font-size:13px;line-height:1.6;margin:10px 0}
 .direct-box a{display:block;text-align:center;background:#a855f7;color:#fff;padding:11px;border-radius:8px;text-decoration:none;font-weight:700;margin:8px 0}
 .req{margin:14px;background:#15151d;padding:12px;border-radius:12px;border:1px solid #333}
 .req input{width:100%;padding:11px;margin:5px 0;border-radius:8px;border:1px solid #333;background:#0a0a0f;color:#fff}
@@ -45,101 +46,8 @@ header{position:sticky;top:0;z-index:99;background:#0a0a0f;padding:12px 14px;dis
 </style>
 </head>
 <body>
-<header><img class="logo-img" src="https://i.ibb.co/6y2xGvJ/v-anime-logo.png" onerror="this.src='https://placehold.co/100x100/a855f7/fff?text=V'"><div class="logo-text">V-<span>ANIME</span></div><input id="searchInput" placeholder="Search anime..." oninput="searchAnime()"></header>
-<div class="hero"><img class="hero-logo" src="https://i.ibb.co/6y2xGvJ/v-anime-logo.png" onerror="this.src='https://placehold.co/200x200/a855f7/fff?text=V'"><h1>Watch <span>Anime</span> Free</h1><p>Best Anime Collection - Hindi & English</p></div>
-<div class="req"><h3>➕ Request Anime</h3><input id="reqName" placeholder="Anime ka Naam likho"><input id="reqLang" placeholder="Language - Hindi / English"><button onclick="submitRequest()">Request Bhejo</button><p id="reqMsg" style="font-size:12px;color:#a855f7;margin-top:6px"></p></div>
-<div class="trending"><h2>🔥 Trending Now</h2><div id="animeList"></div></div>
-<div class="footer">V-ANIME • Watch on Official Platforms</div>
-<script>
-const animes=[
-{id:1,title:"Mushoku Tensei",genre:"Action • Hindi Dub • Smart Player",desc:"Ek jobless aadmi dusri duniya me Rudeus banke paida hota hai.",poster:"https://cdn.myanimelist.net/images/anime/1530/109222.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:23},{name:"Season 2",episodes:24}]},
-{id:2,title:"Solo Leveling",genre:"Action • Hindi Dub",desc:"Sabse kamzor hunter Jinwoo system se sabse strong ban jata hai.",poster:"https://cdn.myanimelist.net/images/anime/1929/139799.jpg",type:"direct",platform:"Crunchyroll",link:"https://www.crunchyroll.com/search?q=Solo%20Leveling",steps:"Step 1: Watch on Crunchyroll dabao<br>Step 2: Search me Solo Leveling likho",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:13}]},
-{id:3,title:"Attack on Titan",genre:"Action • Hindi Dub",desc:"Eren aur uske dost Titans se duniya bachate hai.",poster:"https://cdn.myanimelist.net/images/anime/10/47347.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:12},{name:"Season 3",episodes:22},{name:"Season 4",episodes:28}]},
-{id:4,title:"Jujutsu Kaisen",genre:"Action • Hindi Dub",desc:"Yuji cursed finger kha ke Jujutsu Sorcerer ban jata hai.",poster:"https://cdn.myanimelist.net/images/anime/1171/109222.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:23}]},
-{id:5,title:"One Piece",genre:"Action • Hindi Dub",desc:"Luffy Pirate King banne ke liye Grand Line pe nikalta hai.",poster:"https://cdn.myanimelist.net/images/anime/6/73245.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
-{id:6,title:"Death Note",genre:"Action • Hindi Dub",desc:"Light ko ek notebook milti hai jisme naam likhte hi insan mar jata hai.",poster:"https://cdn.myanimelist.net/images/anime/9/9453.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:37}]},
-{id:7,title:"Demon Slayer",genre:"Action • Hindi Dub",desc:"Tanjiro apni behen Nezuko ko wapas insan banane ke liye Demon Slayer banta hai.",poster:"https://cdn.myanimelist.net/images/anime/1286/99889.jpg",type:"direct",platform:"JioHotstar",link:"https://www.jiohotstar.com/search?query=Demon%20Slayer",steps:"Step 1: Watch on JioHotstar dabao<br>Step 2: Search me Demon Slayer likho",seasons:[{name:"Season 1",episodes:26},{name:"Season 2",episodes:18}]},
-{id:8,title:"Naruto + Shippuden",genre:"Action • Hindi Dub",desc:"Naruto - ek orphan ninja jo Hokage banne ka sapna dekhta hai.",poster:"https://cdn.myanimelist.net/images/anime/13/17405.jpg",type:"direct",platform:"Crunchyroll",link:"https://www.crunchyroll.com/search?q=Naruto",steps:"Step 1: Watch on Crunchyroll dabao<br>Step 2: Search me Naruto likho",seasons:[{name:"Naruto",episodes:24},{name:"Shippuden",episodes:24}]},
-{id:9,title:"My Hero Academia",genre:"Action • Hindi Dub",desc:"Bina power wala Deku No.1 Hero banne ke liye UA me jata hai.",poster:"https://cdn.myanimelist.net/images/anime/10/78745.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:13},{name:"Season 2",episodes:25}]},
-{id:10,title:"Dragon Ball Z",genre:"Action • Hindi Dub",desc:"Goku duniya ko bachane ke liye sabse strong fighters se ladta hai.",poster:"https://cdn.myanimelist.net/images/anime/6/20936.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
-{id:11,title:"Vinland Saga",genre:"Action • Hindi Dub",desc:"Thorfinn apne pita ka badla lene ke liye Viking warrior banta hai.",poster:"https://cdn.myanimelist.net/images/anime/1500/103005.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:24}]},
-{id:12,title:"Re:Zero",genre:"Action • Hindi Dub",desc:"Subaru dusri duniya me jata hai jaha marne pe time wapas chala jata hai.",poster:"https://cdn.myanimelist.net/images/anime/1522/109181.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:25}]},
-{id:13,title:"That Time I Got Reincarnated as Slime",genre:"Action • Hindi Dub",desc:"Ek aadmi slime banke paida hota hai aur ek naya kingdom banata hai.",poster:"https://cdn.myanimelist.net/images/anime/1694/93337.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:24}]},
-{id:14,title:"Overlord",genre:"Action • Hindi Dub",desc:"Ainz game ki duniya me phas jata hai.",poster:"https://cdn.myanimelist.net/images/anime/1530/109222.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:13},{name:"Season 2",episodes:13}]},
-{id:15,title:"Sword Art Online",genre:"Action • Hindi Dub",desc:"VR game me phasne ke baad Kirito ko game clear karna hi ek tarika hai.",poster:"https://cdn.myanimelist.net/images/anime/11/39717.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:24}]},
-{id:16,title:"Bleach",genre:"Action • Hindi Dub",desc:"Ichigo Soul Reaper ban jata hai.",poster:"https://cdn.myanimelist.net/images/anime/3/40451.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:20}]},
-{id:17,title:"Black Clover",genre:"Action • Hindi Dub",desc:"Bina magic wala Asta Wizard King banne ke liye mehnat karta hai.",poster:"https://cdn.myanimelist.net/images/anime/2/88336.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
-{id:18,title:"Fire Force",genre:"Action • Hindi Dub",desc:"Shinra aag se ladne wali team me join hota hai.",poster:"https://cdn.myanimelist.net/images/anime/1666/108843.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:24}]},
-{id:19,title:"Spy x Family",genre:"Action • Hindi Dub",desc:"Spy Loid ko ek fake family banani hai.",poster:"https://cdn.myanimelist.net/images/anime/1446/124150.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:12}]},
-{id:20,title:"Chainsaw Man",genre:"Action • Hindi Dub",desc:"Denji Chainsaw Devil ke saath devil hunter banta hai.",poster:"https://cdn.myanimelist.net/images/anime/1806/126216.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
-{id:21,title:"Tokyo Revengers",genre:"Action • Hindi Dub",desc:"Takemichi time travel karke apni girlfriend ko bachane ki koshish karta hai.",poster:"https://cdn.myanimelist.net/images/anime/1498/134443.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:13}]},
-{id:22,title:"Hunter x Hunter",genre:"Action • Hindi Dub",desc:"Gon apne papa ko dhoondne ke liye Hunter banne nikalta hai.",poster:"https://cdn.myanimelist.net/images/anime/1337/99013.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
-{id:23,title:"Fullmetal Alchemist Brotherhood",genre:"Action • Hindi Dub",desc:"Do bhai apne shareer wapas lane ke liye Philosopher Stone dhoondte hai.",poster:"https://cdn.myanimelist.net/images/anime/1223/96541.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
-{id:24,title:"One Punch Man",genre:"Action • Hindi Dub",desc:"Saitama ek punch me kisi ko bhi hara deta hai.",poster:"https://cdn.myanimelist.net/images/anime/12/76049.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:12}]},
-{id:25,title:"Mob Psycho 100",genre:"Action • Hindi Dub",desc:"Mob ke paas 100% psychic power hai.",poster:"https://cdn.myanimelist.net/images/anime/8/80356.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:13}]},
-{id:26,title:"Dr. Stone",genre:"Action • Hindi Dub",desc:"Senku science se duniya wapas banata hai.",poster:"https://cdn.myanimelist.net/images/anime/1613/102576.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:11}]},
-{id:27,title:"Frieren",genre:"Action • Hindi Dub",desc:"Elf mage Frieren apne doston ke baad ki zindagi samajhti hai.",poster:"https://cdn.myanimelist.net/images/anime/1243/138683.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:28}]},
-{id:28,title:"Kaiju No. 8",genre:"Action • Hindi Dub",desc:"Kafka Kaiju ban jata hai.",poster:"https://cdn.myanimelist.net/images/anime/1948/142046.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
-{id:29,title:"Dan Da Dan",genre:"Action • Hindi Dub",desc:"Momo aur Okarun ghosts aur aliens se ladte hai.",poster:"https://cdn.myanimelist.net/images/anime/1589/141039.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
-{id:30,title:"Blue Lock",genre:"Action • Hindi Dub",desc:"Japan ka best striker banne ke liye 300 players me se ek ko chuna jayega.",poster:"https://cdn.myanimelist.net/images/anime/1662/134088.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:14}]},
-{id:31,title:"Haikyuu",genre:"Action • Hindi Dub",desc:"Hinata volleyball me best banne ke liye Karasuno team me jata hai.",poster:"https://cdn.myanimelist.net/images/anime/7/76014.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:25}]},
-{id:32,title:"Boruto",genre:"Action • Hindi Dub",desc:"Naruto ka beta Boruto apni khud ki kahani banata hai.",poster:"https://cdn.myanimelist.net/images/anime/1090/99847.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
-{id:33,title:"My Dress-Up Darling",genre:"Action • Hindi Dub",desc:"Gojo cosplay banata hai.",poster:"https://cdn.myanimelist.net/images/anime/1765/126451.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
-{id:34,title:"Horimiya",genre:"Action • Hindi Dub",desc:"Hori aur Miyamura ki secret love story.",poster:"https://cdn.myanimelist.net/images/anime/1695/111486.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:13}]},
-{id:35,title:"Kaguya-sama Love is War",genre:"Action • Hindi Dub",desc:"Do toppers pyaar me pehle confess nahi karna chahte.",poster:"https://cdn.myanimelist.net/images/anime/1295/106551.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:12}]},
-{id:36,title:"Your Name",genre:"Action • Hindi Dub",desc:"Do strangers ke shareer badal jate hai.",poster:"https://cdn.myanimelist.net/images/anime/5/87048.jpg",type:"youtube",seasons:[{name:"Movie",episodes:1}]},
-{id:37,title:"Weathering With You",genre:"Action • Hindi Dub",desc:"Ek ladka baarish rokne wali ladki se milta hai.",poster:"https://cdn.myanimelist.net/images/anime/1880/101059.jpg",type:"youtube",seasons:[{name:"Movie",episodes:1}]},
-{id:38,title:"A Silent Voice",genre:"Action • Hindi Dub",desc:"Bullying aur maafi ki sabse emotional movie.",poster:"https://cdn.myanimelist.net/images/anime/1122/96435.jpg",type:"youtube",seasons:[{name:"Movie",episodes:1}]},
-{id:39,title:"Suzume",genre:"Action • Hindi Dub",desc:"Suzume darwaze band karke duniya ko bachati hai.",poster:"https://cdn.myanimelist.net/images/anime/1571/130722.jpg",type:"youtube",seasons:[{name:"Movie",episodes:1}]},
-{id:40,title:"Classroom of the Elite",genre:"Action • Hindi Dub",desc:"Elite school me Ayanokoji apni asli power chhupata hai.",poster:"https://cdn.myanimelist.net/images/anime/5/86830.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:13}]},
-{id:41,title:"The Eminence in Shadow",genre:"Action • Hindi Dub",desc:"Cid shadow me sabse strong banna chahta hai.",poster:"https://cdn.myanimelist.net/images/anime/1812/134736.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:20},{name:"Season 2",episodes:12}]},
-{id:42,title:"Shield Hero",genre:"Action • Hindi Dub",desc:"Naofumi ko Shield Hero banke duniya bachani hai.",poster:"https://cdn.myanimelist.net/images/anime/1911/95465.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:13}]},
-{id:43,title:"Konosuba",genre:"Action • Hindi Dub",desc:"Kazuma dusri duniya me sabse funny party ke saath adventure karta hai.",poster:"https://cdn.myanimelist.net/images/anime/7/83938.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:10},{name:"Season 2",episodes:10}]},
-{id:44,title:"Bungo Stray Dogs",genre:"Action • Hindi Dub",desc:"Atsushi ek detective agency join karta hai.",poster:"https://cdn.myanimelist.net/images/anime/8/80365.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:12}]},
-{id:45,title:"Tokyo Ghoul",genre:"Action • Hindi Dub",desc:"Kaneki aadha ghoul ban jata hai.",poster:"https://cdn.myanimelist.net/images/anime/5/64449.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
-{id:46,title:"Parasyte",genre:"Action • Hindi Dub",desc:"Shinichi ke haath me ek alien parasyte aa jata hai.",poster:"https://cdn.myanimelist.net/images/anime/3/73178.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
-{id:47,title:"Sakamoto Days",genre:"Action • Hindi Dub",desc:"Ex-hitman Sakamoto ab ek dukaan chalata hai.",poster:"https://cdn.myanimelist.net/images/anime/1888/142830.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:11}]},
-{id:48,title:"Mashle",genre:"Action • Hindi Dub",desc:"Bina magic wali duniya me Mash sirf muscles se sabko harata hai.",poster:"https://cdn.myanimelist.net/images/anime/1358/140354.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:12}]},
-{id:49,title:"Solo Leveling - Ragnarok",genre:"Action • Hindi Dub",desc:"Jinwoo ke bete ki kahani.",poster:"https://cdn.myanimelist.net/images/anime/1929/139799.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
-{id:50,title:"Look Back",genre:"Action • Hindi Dub",desc:"Do manga artists ki dosti aur sapne ki kahani.",poster:"https://cdn.myanimelist.net/images/anime/1450/147923.jpg",type:"youtube",seasons:[{name:"Movie",episodes:1}]},
-{id:51,title:"Demon Slayer - Hashira Training",genre:"Action • Hindi Dub",desc:"Tanjiro Hashira Training ke liye taiyaar hai.",poster:"https://cdn.myanimelist.net/images/anime/1286/99889.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:8}]},
-{id:52,title:"Vinland - Extra",genre:"Action • Hindi Dub",desc:"Thorfinn ki nayi kahani.",poster:"https://cdn.myanimelist.net/images/anime/1500/103005.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
-{id:53,title:"Jobless Reincarnation - OVA",genre:"Action • Hindi Dub",desc:"Rudeus ki extra kahani.",poster:"https://cdn.myanimelist.net/images/anime/1530/109222.jpg",type:"youtube",seasons:[{name:"OVA",episodes:2}]},
-{id:54,title:"Frieren - Beyond",genre:"Action • Hindi Dub",desc:"Frieren ki aage ki journey.",poster:"https://cdn.myanimelist.net/images/anime/1243/138683.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
-{id:55,title:"Naruto - Classic Clips",genre:"Action • Hindi Dub",desc:"Naruto ke best moments aur fights.",poster:"https://cdn.myanimelist.net/images/anime/13/17405.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
-{id:56,title:"Shangri-La Frontier",genre:"Action • Hindi Dub",desc:"Rakuro best VR game Shangri-La Frontier khelta hai.",poster:"https://cdn.myanimelist.net/images/anime/1384/134586.jpg",type:"youtube",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:25}]},
-];
-let currentSeason={}; let currentEp={};
-function render(list){
-let html="";
-list.forEach(a=>{
-let sIdx=currentSeason[a.id]||0; let season=a.seasons[sIdx];
-let epBtns=""; for(let i=1;i<=Math.min(season.episodes,24);i++){let act=(currentEp[a.id]===i)?'active':''; epBtns+=`<button class="${act}" onclick="playEp(${a.id},${i},this,'${a.title}',${sIdx})">Ep ${i}</button>`;}
-let playerHtml="";
-if(a.type==="youtube"){ playerHtml=`<div class="player" id="player-${a.id}"><div class="player-msg">▶ Watch Now > Ep dabao - Video yahi andar chalega</div><iframe id="frame-${a.id}" style="display:none" allowfullscreen allow="autoplay; encrypted-media"></iframe></div>`; }
-else{ playerHtml=`<div class="direct-box"><b>${a.title} - Direct Watch</b><br>${a.steps}<a href="${a.link}" target="_blank">Watch on ${a.platform} ➜</a></div>`; }
-let seasonBtns=a.seasons.map((s,idx)=>`<button class="${idx===sIdx?'active':''}" onclick="changeSeason(${a.id},${idx})">${s.name}</button>`).join("");
-html+=`<div class="card"><img src="${a.poster}" onerror="this.src='https://placehold.co/300x400/222/fff?text=${encodeURIComponent(a.title)}'"><div class="card-body"><h3>${a.title}</h3><p>${a.genre}</p><button class="watch-btn" onclick="toggleDetail(${a.id},this)">▶ Watch Now</button><div class="detail" id="d-${a.id}"><div style="font-size:12px;color:#bbb;margin-top:8px">${a.desc}</div>${playerHtml}<div class="season-bar">${seasonBtns}</div><div class="ep-grid">${epBtns}</div></div></div></div>`;
-});
-document.getElementById("animeList").innerHTML=html;
-}
-function toggleDetail(id,btn){let d=document.getElementById('d-'+id);d.classList.toggle('show');}
-function changeSeason(id,idx){currentSeason[id]=idx;currentEp[id]=0;render(animes);}
-function playEp(id,ep,btn,title,sIdx){
-currentEp[id]=ep;
-let card=btn.closest('.card');
-card.querySelectorAll('.ep-grid button').forEach(b=>b.classList.remove('active'));
-btn.classList.add('active');
-let frame=document.getElementById('frame-'+id);
-if(frame){
-frame.style.display='block';
-let q=encodeURIComponent(title+" Episode "+ep+" Hindi Dub Trailer");
-frame.src="https://www.youtube.com/embed?listType=search&list="+q+"&autoplay=1";
-}
-}
-function searchAnime(){let q=document.getElementById("searchInput").value.toLowerCase();let f=animes.filter(a=>a.title.toLowerCase().includes(q));render(f);}
-function submitRequest(){let n=document.getElementById("reqName").value;let l=document.getElementById("reqLang").value;if(!n)return alert("Anime ka naam likho");document.getElementById("reqMsg").innerText=`Request Saved: ${n} - ${l} ✅ Hum jald add karenge!`;document.getElementById("reqName").value="";document.getElementById("reqLang").value="";}
-render(animes);
-</script>
-</body>
-</html>
+<header><div class="logo-box">V</div><div class="logo-text">V-<span>ANIME</span></div><input id="searchInput" placeholder="Search anime..." oninput="searchAnime()"></header>
+
+<!-- HOME PAGE -->
+<div id="homePage">
+<div class="hero"><div class="hero-logo-box">V</div><h1>Watch <span>Anime</span> Free</h1><p>Best Anime Collection - Hindi
