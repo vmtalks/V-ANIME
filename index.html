@@ -1,110 +1,138 @@
 <!DOCTYPE html>
-<html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>V-ANIME - Watch Anime Free</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V-ANIME</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0a0a0f;color:#fff;font-family:Arial,sans-serif;padding:0 15px 20px}
-.header{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-.logo-left{display:flex;align-items:center;gap:10px}
-.logo-left img{width:52px;height:52px;border-radius:50%;border:2px solid #a855f7;object-fit:cover;box-shadow:0 0 18px #a855f7}
-.logo-left h1{font-size:28px;font-weight:900}
-.logo-left h1 span{color:#c084fc;background:linear-gradient(90deg,#e879f9,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-#search{background:#1e1e2a;border:none;color:#aaa;padding:10px 14px;border-radius:20px;font-size:13px;outline:none;width:150px}
-.hero{text-align:center;padding:18px 0 8px;background:linear-gradient(180deg,#1a0a2e 0%,#0a0a0f 100%)}
-.hero img{width:150px;height:150px;border-radius:50%;border:3px solid #a855f7;object-fit:cover;box-shadow:0 0 35px #a855f7}
-.hero h2{font-size:38px;margin:16px 0 6px;font-weight:900}
-.hero h2 span{color:#a855f7}
-.hero p{color:#999;font-size:15px}
-.section{font-size:24px;font-weight:800;margin:22px 0 14px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.card{background:#1e1e28;border-radius:16px;overflow:hidden;cursor:pointer}
-.card .poster img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
-.cardInfo{padding:12px}
-.cardInfo h3{font-size:18px}
-.cardInfo p{font-size:13px;color:#aaa;margin:5px 0}
-.season-bar{display:flex;gap:4px;margin:8px 0 3px}
-.season-bar i{flex:1;height:5px;border-radius:99px;background:#333;display:block}
-.season-bar i.on{background:#a855f7}
-.season-label{font-size:11px;color:#aaa;margin-bottom:10px}
-.season-label b{color:#fff}
-.watch{background:linear-gradient(90deg,#c084fc,#a855f7);border:none;color:#fff;padding:10px;width:100%;border-radius:99px;font-size:14px;font-weight:700;cursor:pointer}
-#modal{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:99;padding:12px}
-#modal.open{display:flex}
-.box{width:100%;max-width:900px}
-.box iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}
-.close{float:right;background:#a855f7;border:0;color:#fff;padding:8px 14px;border-radius:99px;margin-bottom:8px;cursor:pointer;font-weight:700}
-</style></head><body>
-
-<div class="header">
-<div class="logo-left"><img src="IMG-20261106-WA0000.jpg"><h1>V-<span>ANIME</span></h1></div>
-<input id="search" placeholder="Search anime..." onkeyup="filterAnime()">
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#0a0a0f;color:#fff}
+header{position:sticky;top:0;z-index:99;background:#0a0a0f;padding:10px 12px;display:flex;align-items:center;gap:10px}
+.logo-img{width:48px;height:48px;border-radius:50%;border:2px solid #a855f7;object-fit:cover;box-shadow:0 0 15px #a855f7;background:#000}
+.logo-text{font-size:26px;font-weight:900;letter-spacing:1px;white-space:nowrap}.logo-text span{color:#a855f7}
+#searchInput{flex:1;padding:10px 14px;border-radius:20px;border:none;background:#1e1e26;color:#fff;outline:none;min-width:0}
+.hero{text-align:center;padding:20px 14px 6px}
+.hero-logo{width:130px;height:130px;border-radius:50%;border:3px solid #a855f7;object-fit:cover;box-shadow:0 0 35px #a855f7;background:#000}
+.hero h1{font-size:34px;margin-top:14px}.hero h1 span{color:#a855f7}
+.hero p{color:#aaa;margin-top:8px;font-size:14px}
+.trending{padding:14px}.trending h2{font-size:24px;margin-bottom:12px}
+#animeList{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#15151d;border-radius:16px;overflow:hidden;border:1px solid #222}
+.card img{width:100%;height:220px;object-fit:cover;display:block;background:#222}
+.card-body{padding:12px}.card-body h3{font-size:17px;line-height:1.2;min-height:40px}
+.card-body p{font-size:13px;color:#aaa;margin:5px 0 10px}
+.watch-btn{width:100%;padding:10px;background:#a855f7;color:#fff;border:none;border-radius:20px;font-weight:700;font-size:14px;cursor:pointer}
+#detailPage{display:none;padding:12px}
+.back-btn{background:#222;color:#fff;padding:9px 16px;border-radius:20px;border:none;font-size:14px;cursor:pointer}
+.d-top{display:flex;gap:14px;margin:14px 0}.d-top img{width:120px;height:170px;border-radius:12px;object-fit:cover;background:#222}
+.d-top h2{font-size:22px;line-height:1.2}.d-top p{color:#a855f7;font-size:13px;margin:6px 0}
+.player{margin:10px 0;border-radius:12px;overflow:hidden;background:#000}.player iframe{width:100%;height:230px;border:none;display:block}
+.player-msg{padding:12px;text-align:center;font-size:12px;color:#aaa}
+.now-playing{background:#1e1e1e;padding:10px;border-radius:10px;font-size:14px;margin-bottom:10px;display:none}.now-playing b{color:#a855f7}
+.ep-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.ep-grid button{padding:11px 0;background:#2a2a2a;border:1px solid #333;color:#fff;border-radius:8px;font-size:13px}.ep-grid button.active{background:#a855f7;border:2px solid #a855f7}
+.direct-box{background:#222;padding:12px;border-radius:10px;font-size:13px;line-height:1.6;margin:10px 0}.direct-box a{display:block;text-align:center;background:#a855f7;color:#fff;padding:11px;border-radius:8px;text-decoration:none;font-weight:700;margin:8px 0}
+.req{margin:14px;background:#15151d;padding:12px;border-radius:12px;border:1px solid #333}.req input{width:100%;padding:11px;margin:5px 0;border-radius:8px;border:1px solid #333;background:#0a0a0f;color:#fff}.req button{width:100%;padding:11px;background:#a855f7;color:#fff;border:none;border-radius:8px;font-weight:700}
+.footer{text-align:center;color:#777;font-size:12px;padding:20px}
+</style>
+</head>
+<body>
+<header><img class="logo-img" src="IMG-20261106-WA6885.jpg"><div class="logo-text">V-<span>ANIME</span></div><input id="searchInput" placeholder="Search anime..." oninput="searchAnime()"></header>
+<div id="homePage">
+<div class="hero"><img class="hero-logo" src="IMG-20261106-WA6885.jpg"><h1>Watch <span>Anime</span> Free</h1><p>Best Anime Collection - Hindi & English</p></div>
+<div class="req"><h3>➕ Request Anime</h3><input id="reqName" placeholder="Anime ka Naam likho"><input id="reqLang" placeholder="Language - Hindi / English"><button onclick="submitRequest()">Request Bhejo</button><p id="reqMsg" style="font-size:12px;color:#a855f7;margin-top:6px"></p></div>
+<div class="trending"><h2>🔥 Trending Now</h2><div id="animeList"></div></div>
 </div>
-
-<div class="hero">
-<img src="IMG-20261106-WA0000.jpg">
-<h2>Watch <span>Anime</span> Free</h2>
-<p>Best Anime Collection - Hindi & English</p>
-</div>
-
-<div class="section">🔥 Trending Now</div>
-<div class="grid" id="animeGrid"></div>
-
-<div id="modal"><div class="box"><button class="close" onclick="closeModal()">✕ Close</button><iframe id="player" allowfullscreen allow="autoplay; encrypted-media"></iframe></div></div>
-
+<div id="detailPage"><button class="back-btn" onclick="goBack()">⬅ Back to Home</button><div class="d-top"><img id="dPoster" src=""><div><h2 id="dTitle"></h2><p id="dLang"></p><span id="dDesc" style="font-size:13px;color:#aaa;line-height:1.4"></span></div></div><div class="now-playing" id="nowPlaying">▶ Ab Chal Raha Hai: <b id="nowText"></b></div><div id="playerWrap"></div><div id="epWrap"></div><div id="directWrap"></div></div>
+<div class="footer">V-ANIME • Watch on Official Platforms</div>
 <script>
-const data=[
-{t:"Mushoku Tensei",g:"Action • Hindi Dub • Smart Player",id:"1TiBoHQUj3I",seasons:2,cur:1},
-{t:"Cells at Work",g:"Action • Hindi Dub",id:"bmQzXqNs6v0",seasons:2,cur:1},
-{t:"Re:Zero Season 4",g:"Action • Original",id:"jqY7fWyEIMY",seasons:4,cur:4},
-{t:"Classroom of the Elite S4",g:"Action • Original",id:"urYYpkcayvQ",seasons:4,cur:4},
-{t:"Attack on Titan",g:"Action • Hindi Dub",id:"vmWAEQ8qIc4",seasons:4,cur:1},
-{t:"7th Prince",g:"Action • Original",id:"aK8Gtxw-9bE",seasons:2,cur:1},
-{t:"BOFURI",g:"Action • Hindi Dub",id:"7NRUGne6Zjk",seasons:2,cur:1},
-{t:"One Punch Man S3",g:"Action • Original",id:"iOFHoZWeEw4",seasons:3,cur:3},
-{t:"Reborn to Master the Blade",g:"Action • Original",id:"VwCIk-vbQiI",seasons:1,cur:1},
-{t:"Appraiser Class",g:"Action • Original",id:"3ZDbVRlCI4o",seasons:1,cur:1},
-{t:"JoJo Season 1",g:"Action • Hindi Dub",id:"fvSKmPdD2a4",seasons:6,cur:1},
-{t:"JoJo Season 2",g:"Action • Hindi Dub",id:"0miyPXfTszo",seasons:6,cur:2},
-{t:"JoJo Season 3",g:"Action • Hindi Dub",id:"NLZP_z2PxCw",seasons:6,cur:3},
-{t:"JoJo Season 4",g:"Action • Hindi Dub",id:"dB8607NiXuM",seasons:6,cur:4},
-{t:"I Parry Everything",g:"Action • Original",id:"F6RmPmdpazw",seasons:1,cur:1},
-{t:"Hunter x Hunter",g:"Action • Hindi Dub",id:"d6kBeJjTGnY",seasons:6,cur:1},
-{t:"Fairy Tail",g:"Action • Hindi Dub",id:"DDXd4o_XBeE",seasons:9,cur:1},
-{t:"World's Finest Assassin",g:"Action • Original",id:"4ftVLBguuYc",seasons:2,cur:1},
-{t:"Dandadan",g:"Action • Hindi Dub",id:"NRxTXed7I7k",seasons:2,cur:1},
-{t:"Tokyo Revengers",g:"Action • Hindi Dub",id:"Nm21TTXUkf4",seasons:4,cur:1},
-{t:"Campfire Cooking",g:"Action • Original",id:"uLezuU0GL6Q",seasons:2,cur:1},
-{t:"Junji Ito Collection",g:"Horror • Original",id:"uRUKmuYMAww",seasons:1,cur:1},
-{t:"SPY x FAMILY",g:"Action • Hindi Dub",id:"5ASJJI_RkiA",seasons:3,cur:1},
-{t:"Cheat Skill in Another World",g:"Action • Original",id:"twGVFfRI-7s",seasons:2,cur:1},
-{t:"Pokemon Journeys",g:"Action • Hindi Dub",id:"Ud-PtULy4gs",seasons:2,cur:1},
-{t:"Pokemon XY + XYZ",g:"Action • Hindi Dub",id:"hIXdyRpuSLc",seasons:2,cur:1},
-{t:"My Hero Academia S2",g:"Action • Hindi Dub",id:"9ZIgCYSn3e8",seasons:8,cur:2},
-{t:"My Hero Academia S1",g:"Action • Hindi Dub",id:"AhqVltWDqFA",seasons:8,cur:1},
-{t:"Overlord",g:"Action • Hindi Dub",id:"KOWcj7XKnfQ",seasons:4,cur:1},
-{t:"Blue Lock",g:"Sports • Hindi Dub",id:"IVsII3dLbWc",seasons:2,cur:1},
-{t:"Jujutsu Kaisen",g:"Action • Hindi Dub",id:"RYI-WG_HFV8",seasons:3,cur:1},
-{t:"Tamon's B-Side",g:"Romance • Original",id:"qFmSz2ZVxCA",seasons:1,cur:1},
-{t:"Yowayowa Sensei",g:"Comedy • Original",id:"UfkutRs8RHM",seasons:1,cur:1},
-{t:"Hero Without a Class",g:"Action • Original",id:"0pwdLZbLOjU",seasons:1,cur:1},
-{t:"Frieren Season 2",g:"Action • Hindi Dub",id:"n6HZo_33YaQ",seasons:2,cur:2},
-{t:"Frieren Season 1",g:"Action • Hindi Dub",id:"Iwr1aLEDpe4",seasons:2,cur:1},
-{t:"Aharen-san",g:"Comedy • Original",id:"F7bGTibgcjM",seasons:2,cur:1},
-{t:"Zenshu",g:"Action • Original",id:"SuKb2IymZfA",seasons:1,cur:1},
-{t:"Sentenced to Be a Hero",g:"Action • Original",id:"GcRs1JC7xeg",seasons:1,cur:1},
-{t:"Vinland Saga",g:"Action • Hindi Dub",id:"UkJmBWvCfNU",seasons:2,cur:1},
-{t:"Attack on Titan S4",g:"Action • Hindi Dub",id:"c14MVY3EVaQ",seasons:4,cur:4},
-{t:"Aoashi",g:"Sports • Original",id:"5hIIBK5H-Ug",seasons:2,cur:1},
-{t:"Oshi no Ko Season 1",g:"Drama • Original",id:"BQ28u-8c-hI",seasons:3,cur:1},
-{t:"Oshi no Ko Season 2",g:"Drama • Original",id:"GKvBR7tR-Kk",seasons:3,cur:2},
+const animes=[
+{id:1,title:"Assassination Classroom",genre:"Action • Hindi Dub",pl:"PLLGHK4B_TzTI",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/5/70069.jpg"},
+{id:2,title:"That Time I Got Reincarnated as a Slime",genre:"Action • Hindi Dub",pl:"PLCXXlpOrecww",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/1694/133372.jpg"},
+{id:3,title:"Mob Psycho 100",genre:"Action • Hindi Dub",pl:"PLZiKGmhwMtho",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/8/80356.jpg"},
+{id:4,title:"Classroom of the Elite",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL17x8mbfPIYWRjkCTlrqEWW5",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/5/86830.jpg"},
+{id:5,title:"Skeleton Knight in Another World",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL15y66-tQioD3GUUGNJflZdf",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1703/121518.jpg"},
+{id:6,title:"Welcome to Demon School! Iruma-kun",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL15ur1TfkHn1JYl281JL_yzN",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/1504/107061.jpg"},
+{id:7,title:"The God of High School",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL14U47Nk3lfKGG1dM4TZj4KO",type:"yt",eps:13,poster:"https://cdn.myanimelist.net/images/anime/1141/110846.jpg"},
+{id:8,title:"Mushoku Tensei Season 3",genre:"Action • Japanese",pl:"PLpm1VVK4UL15xtpqnayQS7Px-BzApuPFN",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1530/109222.jpg"},
+{id:9,title:"One Punch Man",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL14XTDA9wPpCC6zKB2jUh9vY",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/12/76049.jpg"},
+{id:10,title:"Re:Zero - Starting Life in Another World",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL16i-EZjQaCvu70OTtrOLkog",type:"yt",eps:25,poster:"https://cdn.myanimelist.net/images/anime/1522/109181.jpg"},
+{id:11,title:"Cells at Work!",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL16zEKukO8H0beDxcxhBu9X-",type:"yt",eps:13,poster:"https://cdn.myanimelist.net/images/anime/1423/100038.jpg"},
+{id:12,title:"Re:Zero Season 4",genre:"Action • Japanese",pl:"PLpm1VVK4UL14ih7cXXuCbtFuCIgaSeIIG",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1522/109181.jpg"},
+{id:13,title:"Classroom of the Elite Season 4",genre:"Action • Japanese",pl:"PLpm1VVK4UL14msnM1M-Up8Vuwph7SdteK",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/5/86830.jpg"},
+{id:14,title:"Attack on Titan",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL16H1PewtveOnqL8QIV9F4S9",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/10/47347.jpg"},
+{id:15,title:"I Was Reincarnated as the 7th Prince",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL175QMJkQvNh72FgpTWIqhK0",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1812/134736.jpg"},
+{id:16,title:"BOFURI: I Don't Want to Get Hurt, so I'll Max Out My Defense",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL15ShgULlNCYDVlDCthHcEj5",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1610/108262.jpg"},
+{id:17,title:"One Punch Man Season 3",genre:"Action • Japanese",pl:"PLpm1VVK4UL17v6M0gPrArFftktIiFRLye",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/12/76049.jpg"},
+{id:18,title:"Reborn to Master the Blade",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL16KTCOUnfxfC7llPHvS81eL",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1806/126216.jpg"},
+{id:19,title:"Even Given the Worthless Appraiser Class, I'm Actually the Strongest",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL17zZrbdEUyZPQobwvEwjcmm",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1006/138858.jpg"},
+{id:20,title:"JoJo's Bizarre Adventure Season 1",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL17hS7Fx413Wl8kwJ0ezu6lA",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/3/40451.jpg"},
+{id:21,title:"JoJo's Bizarre Adventure Season 2",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL16aPAGk_ZCCpaAQ99Q9nj4e",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/11/55267.jpg"},
+{id:22,title:"JoJo's Bizarre Adventure Season 3",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL15YwWH8yTyrfwj55bOmTvTT",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/5/76018.jpg"},
+{id:23,title:"JoJo's Bizarre Adventure Season 4",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL16-iDOlu33co3uSs1DyMNLN",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/9/88268.jpg"},
+{id:24,title:"I Parry Everything",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL17iReLWpJ2f1qeiKWmvPMUF",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1223/96541.jpg"},
+{id:25,title:"Hunter x Hunter - All Seasons",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL16zaLvhM1L_HUNI4kkyiWHi",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/1337/99013.jpg"},
+{id:26,title:"Fairy Tail",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL1527GtQ-Un5MCIQ7HX8DhoH",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/5/18179.jpg"},
+{id:27,title:"The World's Finest Assassin Gets Reincarnated in Another World as an Aristocrat",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL14SsTfIpn03QH6y4TCh5OyC",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1013/121243.jpg"},
+{id:28,title:"Dandadan",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL15vn9lYeQzIKfx08vAzF6KY",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1589/141039.jpg"},
+{id:29,title:"Tokyo Revengers",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL16O9kFPHnb5CLsN2YEpVfRE",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/1498/134443.jpg"},
+{id:30,title:"Campfire Cooking in Another World with My Absurd Skill",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL165mkmnfel5QbOhPmscdfxq",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1109/123609.jpg"},
+{id:31,title:"Junji Ito Collection",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL15iS_b-3ZAfIt2wDCgiJSzL",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/3/73178.jpg"},
+{id:32,title:"Mushoku Tensei S1 + S2",genre:"Action • Hindi Dub • Smart Player",pl:"PLpm1VVK4UL17_GoSaunqB9MFvvES607w7",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/1530/109222.jpg"},
+{id:33,title:"SPY x FAMILY",genre:"Action • Hindi Dub",pl:"PLpm1VVK4UL17_2kh-QgKo3v11TxXLePn-",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/1446/124150.jpg"},
+{id:34,title:"I Got a Cheat Skill in Another World",genre:"Action • Japanese",pl:"PLpm1VVK4UL15Dw8TQ1WSH7B-wA_38c-lb",type:"yt",eps:13,poster:"https://cdn.myanimelist.net/images/anime/1937/124401.jpg"},
+{id:35,title:"And You Thought There Is Never a Girl Online?",genre:"Action • Japanese",pl:"PLpm1VVK4UL15p60e7Ny3gf4m5mZhYS_mi",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/12/77118.jpg"},
+{id:36,title:"Pokemon Journeys + Pokemon Ultimate Journeys",genre:"Action • Hindi Dub",pl:"PLxjFnCWdSoEU_WkY4ITVZyr8R3h6J0G92",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/13/128176.jpg"},
+{id:37,title:"Pokemon XY + Pokemon XYZ",genre:"Action • Hindi Dub",pl:"PLxjFnCWdSoEUR0iBvTDaTrCVeAn7_fi1E",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/5/74138.jpg"},
+{id:38,title:"My Hero Academia Season 2",genre:"Action • Hindi Dub",pl:"PLDc87VKx6bqk",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/10/78745.jpg"},
+{id:39,title:"My Hero Academia Season 1",genre:"Action • Hindi Dub",pl:"PLebNsrMbbA7g",type:"yt",eps:13,poster:"https://cdn.myanimelist.net/images/anime/10/78745.jpg"},
+{id:40,title:"Overlord - All Seasons",genre:"Action • Hindi Dub",pl:"PLYL_xVf-h4wA",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/1530/117776.jpg"},
+{id:41,title:"Blue Lock - All Seasons",genre:"Action • Hindi Dub",pl:"PLWl_J02rdcW0",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/1662/134088.jpg"},
+{id:42,title:"Jujutsu Kaisen - Season 1 + Season 2",genre:"Action • Hindi Dub",pl:"PLYlUPVVSF0TA",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/1171/109222.jpg"},
+{id:43,title:"Tamon's B-Side",genre:"Action • Hindi Dub",pl:"PLhpMvmtHsuqL_TxLSOi1kvT7LiJApl_sa",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1582/147430.jpg"},
+{id:44,title:"Yowayowa Sensei",genre:"Action • Hindi Dub",pl:"PLhpMvmtHsuqJ5qjXPh3vMDEimPpiF69_i",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1364/144996.jpg"},
+{id:45,title:"Hero Without a Class",genre:"Action • Japanese",pl:"PLhpMvmtHsuqJ1AmQWv_5irFTjkMexR4JT",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1120/148001.jpg"},
+{id:46,title:"The Brilliant Healer's New Life in the Shadows",genre:"Action • Japanese",pl:"PLhpMvmtHsuqKSQmQFtTm-0H4-9wZoiJsm",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1806/142740.jpg"},
+{id:47,title:"More than a Married Couple, but Not Lovers",genre:"Action • Japanese",pl:"PLhpMvmtHsuqKD4y2Zf9omd8vIy8kIC8lh",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1806/126216.jpg"},
+{id:48,title:"How Not to Summon a Demon Lord",genre:"Action • Japanese",pl:"PLhpMvmtHsuqI50Du6XbzLSvrsKWQDGW3r",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1935/97964.jpg"},
+{id:49,title:"Unlimited Gatcha - Only 1 Video",genre:"Action • Japanese",pl:"4Bam-4ZB3Tk",type:"single",eps:1,poster:"https://cdn.myanimelist.net/images/anime/12/76049.jpg"},
+{id:50,title:"Zom 100: Bucket List of the Dead",genre:"Action • Hindi Dub",pl:"PL58yVIn3OxOGh82u90rGNluHhqlsOWsgU",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1379/134065.jpg"},
+{id:51,title:"Ragna Crimson",genre:"Action • Hindi Dub",pl:"PL58yVIn3OxOF_vVMt2e8ggmJMHeacDjlv",type:"yt",eps:24,poster:"https://cdn.myanimelist.net/images/anime/1610/133847.jpg"},
+{id:52,title:"As a Reincarnated Aristocrat, I'll Use My Appraisal Skill to Rise in the World - Season 1",genre:"Action • Hindi Dub",pl:"PLxx7rWda3SdCtNai6bZ00O3Kz6VdbDFEi",type:"yt",eps:12,poster:"https://cdn.myanimelist.net/images/anime/1812/134736.jpg"},
+{id:53,title:"Solo Leveling - Season 1 + Season 2",genre:"Action • Hindi Dub",type:"direct",platform:"Crunchyroll",link:"https://www.crunchyroll.com/series/GDKHZEJ0R/solo-leveling",eps:25,poster:"https://cdn.myanimelist.net/images/anime/1929/139799.jpg"},
+{id:54,title:"Naruto + Naruto Shippuden",genre:"Action • Hindi Dub",type:"direct",platform:"Crunchyroll",link:"https://www.crunchyroll.com/series/GYQ4MW246/naruto",eps:24,poster:"https://cdn.myanimelist.net/images/anime/13/17405.jpg"},
+{id:55,title:"Shangri-La Frontier",genre:"Action • Japanese / English",type:"direct",platform:"YouTube - Kodansha",link:"https://www.youtube.com/@KodanshaAnimeManga/search?query=Shangri-La+Frontier",eps:24,poster:"https://cdn.myanimelist.net/images/anime/1384/134586.jpg"},
 ];
-document.getElementById('animeGrid').innerHTML=data.map(a=>{
-  let bars=''; for(let s=1;s<=a.seasons;s++) bars+=`<i class="${s<=a.cur?'on':''}"></i>`;
-  return `<div class="card"><div class="poster"><img src="https://i.ytimg.com/vi/${a.id}/hqdefault.jpg" loading="lazy"></div><div class="cardInfo"><h3>${a.t}</h3><p>${a.g}</p><div class="season-bar">${bars}</div><div class="season-label">Season <b>${a.cur}</b> / ${a.seasons} Seasons</div><button class="watch" onclick="openModal('${a.id}')">▶ Watch Now</button></div></div>`;
-}).join('');
-function filterAnime(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('.card').forEach(c=>{c.style.display=c.textContent.toLowerCase().includes(q)?'block':'none';});}
-function openModal(id){document.getElementById('player').src=`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;document.getElementById('modal').classList.add('open');}
-function closeModal(){document.getElementById('player').src='';document.getElementById('modal').classList.remove('open');}
-document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal') closeModal();});
+function render(list){
+let html="";
+list.forEach(a=>{
+html+=`<div class="card"><img src="${a.poster}" onerror="this.onerror=null;this.src='https://placehold.co/300x400/1a1a22/fff?text=${encodeURIComponent(a.title.slice(0,20))}'"><div class="card-body"><h3>${a.title}</h3><p>${a.genre}</p><button class="watch-btn" onclick="openDetail(${a.id})">▶ Watch Now</button></div></div>`;
+});
+document.getElementById("animeList").innerHTML=html;
+}
+function openDetail(id){
+let a=animes.find(x=>x.id===id);
+document.getElementById("homePage").style.display="none";document.getElementById("detailPage").style.display="block";
+document.getElementById("dTitle").innerText=a.id+". "+a.title;document.getElementById("dLang").innerText=a.genre;document.getElementById("dDesc").innerText="Tap karo, yahi chalega! • "+a.genre;document.getElementById("dPoster").src=a.poster;document.getElementById("dPoster").onerror=function(){this.src="https://placehold.co/300x400/1a1a22/fff?text="+encodeURIComponent(a.title.slice(0,20))};
+document.getElementById("nowPlaying").style.display="none";
+let epHtml="<h3 style='margin:10px 0'>Episodes</h3><div class='ep-grid'>";
+for(let i=1;i<=Math.min(a.eps,24);i++){epHtml+=`<button id="epBtn${i}" onclick="playEp(${a.id},${i})">Ep ${i}</button>`;}
+epHtml+="</div>";document.getElementById("epWrap").innerHTML=epHtml;
+if(a.type==="direct"){document.getElementById("playerWrap").innerHTML="";document.getElementById("directWrap").innerHTML=`<div class="direct-box"><b>${a.title} - Direct Watch</b><br>Official Link pe Hindi Dub me dekho<a href="${a.link}" target="_blank">Watch on ${a.platform} ➜</a></div>`;}
+else{document.getElementById("directWrap").innerHTML="";document.getElementById("playerWrap").innerHTML=`<div class="player"><div class="player-msg">▶ Ep dabao - Video yahi andar chalega</div><iframe id="mainPlayer" style="display:none" allowfullscreen allow="autoplay; encrypted-media"></iframe></div>`;}
+window.scrollTo(0,0);
+}
+function goBack(){document.getElementById("detailPage").style.display="none";document.getElementById("homePage").style.display="block";let f=document.getElementById("mainPlayer");if(f)f.src="";window.scrollTo(0,0);}
+function playEp(id,ep){
+let a=animes.find(x=>x.id===id);
+document.querySelectorAll('.ep-grid button').forEach(b=>b.classList.remove('active'));let btn=document.getElementById("epBtn"+ep);if(btn)btn.classList.add('active');
+document.getElementById("nowPlaying").style.display="block";document.getElementById("nowText").innerText=a.title+" - Episode "+ep;
+let frame=document.getElementById("mainPlayer");if(!frame)return;frame.style.display="block";
+if(a.type==="single"){frame.src="https://www.youtube.com/embed/"+a.pl+"?autoplay=1";}else{frame.src="https://www.youtube.com/embed?listType=playlist&list="+a.pl+"&index="+ep+"&autoplay=1&rel=0";}
+frame.scrollIntoView({behavior:"smooth"});
+}
+function searchAnime(){let q=document.getElementById("searchInput").value.toLowerCase();let f=animes.filter(a=>a.title.toLowerCase().includes(q));render(f);}
+function submitRequest(){let n=document.getElementById("reqName").value;let l=document.getElementById("reqLang").value;if(!n)return alert("Anime ka naam likho");document.getElementById("reqMsg").innerText=`Request Saved: ${n} - ${l} ✅`;document.getElementById("reqName").value="";document.getElementById("reqLang").value="";}
+render(animes);
 </script>
-</body></html>
+</body>
+</html>
