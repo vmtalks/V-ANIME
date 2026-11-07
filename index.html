@@ -3,151 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>V-ANIME - Watch Anime Free</title>
+<title>V-ANIME</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#0b0b0f;color:#fff}
 header{position:sticky;top:0;z-index:99;background:#0b0b0f;padding:12px 14px;display:flex;gap:10px;align-items:center;border-bottom:1px solid #222}
-.logo{display:flex;align-items:center;gap:6px;font-size:22px;font-weight:900;letter-spacing:1px;white-space:nowrap}
-.logo .v{background:#e50914;color:#fff;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:22px}
-.logo .txt{color:#fff}
-.logo .txt span{color:#e50914}
-#searchInput{flex:1;padding:10px 14px;border-radius:20px;border:1px solid #333;background:#1a1a1a;color:#fff;outline:none;font-size:14px}
+.logo{display:flex;align-items:center;gap:6px;font-size:22px;font-weight:900}
+.logo .v{background:#e50914;color:#fff;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px}
+#searchInput{flex:1;padding:10px 14px;border-radius:20px;border:1px solid #333;background:#1a1a1a;color:#fff;outline:none}
 .hero{text-align:center;padding:22px 14px 6px}
-.hero h1{font-size:28px}
-.hero h1 span{color:#e50914}
-.hero p{color:#aaa;margin-top:6px;font-size:13px}
+.hero h1{font-size:28px}.hero h1 span{color:#e50914}.hero p{color:#aaa;margin-top:6px;font-size:13px}
 .request-box{background:#1a1a1a;margin:12px;padding:12px;border-radius:12px;border:1px solid #333}
-.request-box h3{margin-bottom:8px;font-size:16px}
 .request-box input{width:100%;padding:11px;margin:5px 0;border-radius:8px;border:1px solid #333;background:#0b0b0f;color:#fff}
-.request-box button{width:100%;padding:11px;background:#e50914;color:#fff;border:none;border-radius:8px;font-weight:700;margin-top:6px}
+.request-box button{width:100%;padding:11px;background:#e50914;color:#fff;border:none;border-radius:8px;font-weight:700}
 #animeList{padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(min-width:700px){#animeList{grid-template-columns:1fr 1fr 1fr 1fr}}
 .card{background:#16161c;border-radius:12px;overflow:hidden;border:1px solid #222;padding-bottom:10px}
-.card img{width:100%;height:230px;object-fit:cover;display:block;cursor:pointer}
-.card-body{padding:10px}
-.card-body h3{font-size:15px;line-height:1.3}
+.card img{width:100%;height:230px;object-fit:cover;display:block;background:#222}
+.card-body{padding:10px}.card-body h3{font-size:15px}
 .lang{font-size:12px;color:#4da6ff;margin:5px 0}
-.desc{font-size:12px;color:#bbb;line-height:1.45;min-height:34px}
+.desc{font-size:12px;color:#bbb;line-height:1.45}
 .season-bar{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}
 .season-bar button{padding:6px 12px;border-radius:20px;border:1px solid #444;background:#222;color:#fff;font-size:12px}
 .season-bar button.active{background:#fff;color:#000;font-weight:700}
 .ep-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .ep-grid button{padding:9px 0;background:#2a2a2a;border:1px solid #333;color:#fff;border-radius:8px;font-size:12px}
-.ep-grid button.active{border:2px solid #2b7cff !important;background:#2a2a2a !important}
-.player{margin:10px 0;border-radius:10px;overflow:hidden;background:#000}
-.player iframe{width:100%;height:200px;border:none;display:block}
+.ep-grid button.active{border:2px solid #2b7cff !important}
+.player{margin:10px 0;border-radius:10px;overflow:hidden;background:#000;padding:12px;text-align:center;font-size:12px;color:#aaa}
 .direct-box{background:#222;padding:10px;border-radius:10px;font-size:12px;line-height:1.6}
 .direct-box a{display:block;text-align:center;background:#e50914;color:#fff;padding:11px;border-radius:8px;text-decoration:none;font-weight:700;margin:8px 0}
-.rate{margin-top:10px}
-.rate button{background:none;border:none;font-size:22px;color:#555;cursor:pointer}
+.rate{margin-top:10px}.rate button{background:none;border:none;font-size:22px;color:#555}
 .rate button.on{color:#ffcc00}
-.comment-box{margin-top:8px}
 .comment-box input{width:100%;padding:9px;border-radius:8px;border:1px solid #333;background:#0b0b0f;color:#fff}
-.comment-list{font-size:12px;color:#ccc;margin-top:6px}
-.comment-list div{background:#0b0b0f;padding:6px;border-radius:6px;margin-top:4px}
+.comment-list div{background:#0b0b0f;padding:6px;border-radius:6px;margin-top:4px;font-size:12px}
 .footer{text-align:center;color:#777;font-size:12px;padding:20px}
 </style>
 </head>
 <body>
-
-<header>
-<div class="logo"><div class="v">V</div><div class="txt">V-ANIME<span></span></div></div>
-<input id="searchInput" placeholder="Search anime..." oninput="searchAnime()">
-</header>
-
-<div class="hero">
-<h1>Watch <span>Anime Free</span></h1>
-<p>Explore Top Rated Anime in Hindi & Japanese • 56 Anime Locked</p>
-</div>
-
-<div class="request-box">
-<h3>➕ Request Anime</h3>
-<input id="reqName" placeholder="Anime ka Naam likho">
-<input id="reqLang" placeholder="Language - Hindi / English / Japanese">
-<button onclick="submitRequest()">Request Bhejo</button>
-<p id="reqMsg" style="font-size:12px;color:#4da6ff;margin-top:6px"></p>
-</div>
-
+<header><div class="logo"><div class="v">V</div>V-ANIME</div><input id="searchInput" placeholder="Search anime..." oninput="searchAnime()"></header>
+<div class="hero"><h1>Watch <span>Anime Free</span></h1><p>Explore Top Rated Anime in Hindi & Japanese • 56 Anime Locked</p></div>
+<div class="request-box"><h3>➕ Request Anime</h3><input id="reqName" placeholder="Anime ka Naam likho"><input id="reqLang" placeholder="Language - Hindi / English / Japanese"><button onclick="submitRequest()">Request Bhejo</button><p id="reqMsg" style="font-size:12px;color:#4da6ff;margin-top:6px"></p></div>
 <div id="animeList"></div>
-<div class="footer">V-ANIME • Watch on Official Platforms • Made for Anime Fans</div>
-
+<div class="footer">V-ANIME • Watch on Official Platforms</div>
 <script>
-function P(t){return "https://placehold.co/300x400/16161c/fff?text="+encodeURIComponent(t)}
+// POSTER FIX: Ab poster me naam nahi likha hoga, sirf saaf poster dikhega
+// TRAILER FIX: Rick Astley hata diya, ab Episode dabane pe Official Site khulegi
+function P(){return "https://placehold.co/300x400/222222/222222?text=+"}
 const animes=[
-{id:1,title:"Mushoku Tensei",lang:"Hindi Dub • Japanese • English",desc:"Ek jobless aadmi dusri duniya me Rudeus banke paida hota hai. Magic aur second chance ki kahani.",poster:P("Mushoku Tensei"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:23},{name:"Season 2",episodes:24}]},
-{id:2,title:"Attack on Titan",lang:"Hindi Dub • Japanese • English",desc:"Eren aur uske dost Titans se duniya bachate hai. Sabse dark aur best anime.",poster:P("Attack on Titan"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:12},{name:"Season 3",episodes:22},{name:"Season 4",episodes:28}]},
-{id:3,title:"Jujutsu Kaisen",lang:"Hindi Dub • Japanese • English",desc:"Yuji ek cursed finger kha leta hai aur Jujutsu Sorcerer ban jata hai.",poster:P("Jujutsu Kaisen"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:23}]},
-{id:4,title:"One Piece",lang:"Hindi Dub • Japanese • English",desc:"Luffy Pirate King banne ke liye Grand Line pe nikalta hai. Sabse lambi adventure.",poster:P("One Piece"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24}]},
-{id:5,title:"Death Note",lang:"Hindi Dub • Japanese • English",desc:"Light ko ek aisi notebook milti hai jisme naam likhte hi insan mar jata hai.",poster:P("Death Note"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:37}]},
-{id:6,title:"My Hero Academia",lang:"Hindi Dub • Japanese • English",desc:"Bina power wala Deku, No.1 Hero banne ke liye UA me jata hai.",poster:P("My Hero Academia"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:13},{name:"Season 2",episodes:25}]},
-{id:7,title:"Dragon Ball Z",lang:"Hindi Dub • Japanese • English",desc:"Goku duniya ko bachane ke liye sabse strong fighters se ladta hai.",poster:P("Dragon Ball Z"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24}]},
-{id:8,title:"Vinland Saga",lang:"Hindi Dub • Japanese • English",desc:"Thorfinn apne pita ka badla lene ke liye Viking warrior banta hai.",poster:P("Vinland Saga"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:24}]},
-{id:9,title:"Re:Zero",lang:"Hindi Dub • Japanese • English",desc:"Subaru dusri duniya me jata hai jaha marne pe time wapas chala jata hai.",poster:P("Re Zero"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:25}]},
-{id:10,title:"That Time I Got Reincarnated as Slime",lang:"Hindi Dub • Japanese • English",desc:"Ek aadmi slime banke paida hota hai aur ek naya kingdom banata hai.",poster:P("Slime"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:24},{name:"Season 3",episodes:24}]},
-{id:11,title:"Overlord",lang:"Hindi Dub • Japanese • English",desc:"Ainz game ki duniya me phas jata hai aur sabse strong overlord ban jata hai.",poster:P("Overlord"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:13},{name:"Season 2",episodes:13}]},
-{id:12,title:"Sword Art Online",lang:"Hindi Dub • Japanese • English",desc:"VR game me phasne ke baad Kirito ko game clear karna hi ek tarika hai bachne ka.",poster:P("Sword Art Online"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:24}]},
-{id:13,title:"Bleach",lang:"Hindi Dub • Japanese • English",desc:"Ichigo Soul Reaper ban jata hai aur duniya ko Hollows se bachata hai.",poster:P("Bleach"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:20}]},
-{id:14,title:"Black Clover",lang:"Hindi Dub • Japanese • English",desc:"Bina magic wala Asta, Wizard King banne ke liye mehnat karta hai.",poster:P("Black Clover"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24}]},
-{id:15,title:"Fire Force",lang:"Hindi Dub • Japanese • English",desc:"Shinra aag se ladne wali team me join hota hai aur apne bhai ko dhoondta hai.",poster:P("Fire Force"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:24}]},
-{id:16,title:"Spy x Family",lang:"Hindi Dub • Japanese • English",desc:"Spy Loid ko ek fake family banani hai. Comedy + Action ka best combo.",poster:P("Spy x Family"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:12}]},
-{id:17,title:"Chainsaw Man",lang:"Hindi Dub • Japanese • English",desc:"Denji Chainsaw Devil ke saath milke devil hunter banta hai.",poster:P("Chainsaw Man"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12}]},
-{id:18,title:"Tokyo Revengers",lang:"Hindi Dub • Japanese • English",desc:"Takemichi time travel karke apni girlfriend ko bachane ki koshish karta hai.",poster:P("Tokyo Revengers"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:13}]},
-{id:19,title:"Hunter x Hunter",lang:"Hindi Dub • Japanese • English",desc:"Gon apne papa ko dhoondne ke liye Hunter banne nikalta hai.",poster:P("Hunter x Hunter"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24}]},
-{id:20,title:"Fullmetal Alchemist Brotherhood",lang:"Hindi Dub • Japanese • English",desc:"Do bhai apne shareer wapas lane ke liye Philosopher Stone dhoondte hai.",poster:P("FMA Brotherhood"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24}]},
-{id:21,title:"One Punch Man",lang:"Hindi Dub • Japanese • English",desc:"Saitama ek punch me kisi ko bhi hara deta hai. Sabse funny hero.",poster:P("One Punch Man"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:12}]},
-{id:22,title:"Mob Psycho 100",lang:"Hindi Dub • Japanese • English",desc:"Mob ke paas 100% psychic power hai, par wo normal life jeena chahta hai.",poster:P("Mob Psycho"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:13}]},
-{id:23,title:"Dr. Stone",lang:"Hindi Dub • Japanese • English",desc:"Duniya pathar ban jati hai, Senku science se duniya wapas banata hai.",poster:P("Dr Stone"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:11}]},
-{id:24,title:"Demon Slayer - Hashira Training",lang:"Hindi Dub • Japanese • English",desc:"Tanjiro Hashira Training ke liye taiyaar hai. Infinity Castle se pehle ki kahani.",poster:P("Demon Slayer Training"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:8}]},
-{id:25,title:"Frieren",lang:"Hindi Dub • Japanese • English",desc:"Elf mage Frieren apne doston ke baad ki zindagi aur yaadein samajhti hai.",poster:P("Frieren"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:28}]},
-{id:26,title:"Kaiju No. 8",lang:"Hindi Dub • Japanese • English",desc:"Kafka Kaiju ban jata hai aur Kaiju se ladne wali force me join hota hai.",poster:P("Kaiju No 8"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12}]},
-{id:27,title:"Dan Da Dan",lang:"Hindi Dub • Japanese • English",desc:"Momo aur Okarun ghosts aur aliens se ladte hai. Comedy + Action.",poster:P("Dan Da Dan"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12}]},
-{id:28,title:"Blue Lock",lang:"Hindi Dub • Japanese • English",desc:"Japan ka best striker banne ke liye 300 players me se ek ko chuna jayega.",poster:P("Blue Lock"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:14}]},
-{id:29,title:"Haikyuu",lang:"Hindi Dub • Japanese • English",desc:"Hinata volleyball me best banne ke liye Karasuno team me jata hai.",poster:P("Haikyuu"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:25}]},
-{id:30,title:"Naruto - Classic Clips",lang:"Hindi Dub • Japanese • English",desc:"Naruto ke best moments aur fights - Hokage banne ki shuruaat.",poster:P("Naruto Clips"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12}]},
-{id:31,title:"Boruto",lang:"Hindi Dub • Japanese • English",desc:"Naruto ka beta Boruto apni khud ki kahani banata hai.",poster:P("Boruto"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24}]},
-{id:32,title:"My Dress-Up Darling",lang:"Hindi Dub • Japanese • English",desc:"Gojo cosplay banata hai aur Marin ke saath uski duniya badal jati hai.",poster:P("My Dress Up Darling"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12}]},
-{id:33,title:"Horimiya",lang:"Hindi Dub • Japanese • English",desc:"School ki topper Hori aur quiet Miyamura ki secret love story.",poster:P("Horimiya"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:13}]},
-{id:34,title:"Kaguya-sama Love is War",lang:"Hindi Dub • Japanese • English",desc:"Do toppers pyaar me pehle confess nahi karna chahte. Mind game comedy.",poster:P("Kaguya sama"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:12}]},
-{id:35,title:"Your Name",lang:"Hindi Dub • Japanese • English",desc:"Do strangers ke shareer badal jate hai. Ek emotional masterpiece movie.",poster:P("Your Name"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Movie",episodes:1}]},
-{id:36,title:"Weathering With You",lang:"Hindi Dub • Japanese • English",desc:"Ek ladka baarish rokne wali ladki se milta hai. Beautiful love story.",poster:P("Weathering With You"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Movie",episodes:1}]},
-{id:37,title:"A Silent Voice",lang:"Hindi Dub • Japanese • English",desc:"Bullying aur maafi ki sabse emotional anime movie.",poster:P("A Silent Voice"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Movie",episodes:1}]},
-{id:38,title:"Suzume",lang:"Hindi Dub • Japanese • English",desc:"Suzume darwaze band karke duniya ko bachati hai. Makoto Shinkai ki movie.",poster:P("Suzume"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Movie",episodes:1}]},
-{id:39,title:"Classroom of the Elite",lang:"Hindi Dub • Japanese • English",desc:"Elite school me Ayanokoji apni asli power chhupata hai.",poster:P("Classroom of Elite"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:13}]},
-{id:40,title:"The Eminence in Shadow",lang:"Hindi Dub • Japanese • English",desc:"Cid shadow me sabse strong banna chahta hai aur uski kahani sach ho jati hai.",poster:P("Eminence in Shadow"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:20},{name:"Season 2",episodes:12}]},
-{id:41,title:"Shield Hero",lang:"Hindi Dub • Japanese • English",desc:"Naofumi ko Shield Hero banke duniya bachani hai, par sab uske khilaf hai.",poster:P("Shield Hero"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:13}]},
-{id:42,title:"Konosuba",lang:"Hindi Dub • Japanese • English",desc:"Kazuma dusri duniya me sabse funny party ke saath adventure karta hai.",poster:P("Konosuba"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:10},{name:"Season 2",episodes:10}]},
-{id:43,title:"Bungo Stray Dogs",lang:"Hindi Dub • Japanese • English",desc:"Atsushi ek detective agency join karta hai jaha sabke paas powers hai.",poster:P("Bungo Stray Dogs"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:12}]},
-{id:44,title:"Tokyo Ghoul",lang:"Hindi Dub • Japanese • English",desc:"Kaneki aadha ghoul ban jata hai aur do duniya ke beech phasta hai.",poster:P("Tokyo Ghoul"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12}]},
-{id:45,title:"Parasyte",lang:"Hindi Dub • Japanese • English",desc:"Shinichi ke haath me ek alien parasyte aa jata hai aur dono saath jeete hai.",poster:P("Parasyte"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:24}]},
-{id:46,title:"Vinland - Extra",lang:"Hindi Dub • Japanese • English",desc:"Vikings ki duniya me Thorfinn ki nayi kahani aur naye dushman.",poster:P("Vinland Extra"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12}]},
-{id:47,title:"Jobless Reincarnation - OVA",lang:"Hindi Dub • Japanese • English",desc:"Rudeus ki extra kahani aur naye adventures.",poster:P("Jobless OVA"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"OVA",episodes:2}]},
-{id:48,title:"Sakamoto Days",lang:"Hindi Dub • Japanese • English",desc:"Ex-hitman Sakamoto ab ek dukaan chalata hai, par dushman peecha nahi chhodte.",poster:P("Sakamoto Days"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:11}]},
-{id:49,title:"Solo Leveling - Ragnarok",lang:"Hindi Dub • Japanese • English",desc:"Jinwoo ke bete ki kahani - naya system, naya hunter.",poster:P("Solo Ragnarok"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12}]},
-{id:50,title:"Look Back",lang:"Hindi Dub • Japanese • English",desc:"Do manga artists ki dosti aur sapne ki emotional kahani.",poster:P("Look Back"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Movie",episodes:1}]},
-{id:51,title:"Frieren - Beyond",lang:"Hindi Dub • Japanese • English",desc:"Frieren ki aage ki journey aur naye dost.",poster:P("Frieren Beyond"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12}]},
-{id:52,title:"Mashle",lang:"Hindi Dub • Japanese • English",desc:"Bina magic wali duniya me Mash sirf muscles se sabko harata hai.",poster:P("Mashle"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:12}]},
-{id:53,title:"Solo Leveling",lang:"Hindi Dub • Japanese • English",desc:"Duniya ka sabse kamzor hunter Sung Jinwoo, system se sabse strong ban jata hai.",poster:P("Solo Leveling"),type:"direct",platform:"Crunchyroll",link:"https://www.crunchyroll.com/search?q=Solo%20Leveling",steps:"Step 1: Watch on Crunchyroll dabao<br>Step 2: Crunchyroll App / Website khulegi<br>Step 3: Free Account banao ya Login karo<br>Step 4: Search me Solo Leveling likho<br>Step 5: Hindi Dub select karke Enjoy karo",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:13}]},
-{id:54,title:"Naruto + Shippuden",lang:"Hindi Dub • Japanese • English",desc:"Naruto - ek orphan ninja jo Hokage banne ka sapna dekhta hai.",poster:P("Naruto Shippuden"),type:"direct",platform:"Crunchyroll",link:"https://www.crunchyroll.com/search?q=Naruto",steps:"Step 1: Watch on Crunchyroll dabao<br>Step 2: Crunchyroll App / Website khulegi<br>Step 3: Free Account banao ya Login karo<br>Step 4: Search me Naruto likho<br>Step 5: Hindi Dub select karke Enjoy karo",seasons:[{name:"Naruto",episodes:24},{name:"Shippuden",episodes:24}]},
-{id:55,title:"Shangri-La Frontier",lang:"Japanese • English",desc:"Rakuro - ek kusoge hunter, ab best VR game Shangri-La Frontier khelta hai.",poster:P("Shangri La Frontier"),type:"youtube",trailerId:"dQw4w9WgXcQ",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:25}]},
-{id:56,title:"Demon Slayer",lang:"Hindi Dub • Japanese • English",desc:"Tanjiro apni behen Nezuko ko demon se wapas insan banane ke liye Demon Slayer banta hai.",poster:P("Demon Slayer"),type:"direct",platform:"JioHotstar",link:"https://www.jiohotstar.com/search?query=Demon%20Slayer",steps:"Step 1: Watch on JioHotstar dabao<br>Step 2: JioHotstar App / Website khulegi<br>Step 3: Mobile Number se Login karo<br>Step 4: Agar Jio/Airtel recharge hai to usme JioHotstar Premium FREE milta hai, check karo<br>Step 5: Search me Demon Slayer likho aur Enjoy karo",seasons:[{name:"Season 1",episodes:26},{name:"Season 2",episodes:18}]},
+{id:1,title:"Mushoku Tensei",lang:"Hindi Dub • Japanese • English",desc:"Ek jobless aadmi dusri duniya me Rudeus banke paida hota hai. Magic aur second chance ki kahani.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:23},{name:"Season 2",episodes:24}]},
+{id:2,title:"Attack on Titan",lang:"Hindi Dub • Japanese • English",desc:"Eren aur uske dost Titans se duniya bachate hai. Sabse dark aur best anime.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:12},{name:"Season 3",episodes:22},{name:"Season 4",episodes:28}]},
+{id:3,title:"Jujutsu Kaisen",lang:"Hindi Dub • Japanese • English",desc:"Yuji ek cursed finger kha leta hai aur Jujutsu Sorcerer ban jata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:23}]},
+{id:4,title:"One Piece",lang:"Hindi Dub • Japanese • English",desc:"Luffy Pirate King banne ke liye Grand Line pe nikalta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
+{id:5,title:"Death Note",lang:"Hindi Dub • Japanese • English",desc:"Light ko ek aisi notebook milti hai jisme naam likhte hi insan mar jata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:37}]},
+{id:6,title:"My Hero Academia",lang:"Hindi Dub • Japanese • English",desc:"Bina power wala Deku, No.1 Hero banne ke liye UA me jata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:13},{name:"Season 2",episodes:25}]},
+{id:7,title:"Dragon Ball Z",lang:"Hindi Dub • Japanese • English",desc:"Goku duniya ko bachane ke liye sabse strong fighters se ladta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
+{id:8,title:"Vinland Saga",lang:"Hindi Dub • Japanese • English",desc:"Thorfinn apne pita ka badla lene ke liye Viking warrior banta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:24}]},
+{id:9,title:"Re:Zero",lang:"Hindi Dub • Japanese • English",desc:"Subaru dusri duniya me jata hai jaha marne pe time wapas chala jata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:25}]},
+{id:10,title:"That Time I Got Reincarnated as Slime",lang:"Hindi Dub • Japanese • English",desc:"Ek aadmi slime banke paida hota hai aur ek naya kingdom banata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:24}]},
+{id:11,title:"Overlord",lang:"Hindi Dub • Japanese • English",desc:"Ainz game ki duniya me phas jata hai aur sabse strong overlord ban jata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:13},{name:"Season 2",episodes:13}]},
+{id:12,title:"Sword Art Online",lang:"Hindi Dub • Japanese • English",desc:"VR game me phasne ke baad Kirito ko game clear karna hi ek tarika hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:24}]},
+{id:13,title:"Bleach",lang:"Hindi Dub • Japanese • English",desc:"Ichigo Soul Reaper ban jata hai aur duniya ko Hollows se bachata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:20}]},
+{id:14,title:"Black Clover",lang:"Hindi Dub • Japanese • English",desc:"Bina magic wala Asta, Wizard King banne ke liye mehnat karta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
+{id:15,title:"Fire Force",lang:"Hindi Dub • Japanese • English",desc:"Shinra aag se ladne wali team me join hota hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:24}]},
+{id:16,title:"Spy x Family",lang:"Hindi Dub • Japanese • English",desc:"Spy Loid ko ek fake family banani hai. Comedy + Action.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:12}]},
+{id:17,title:"Chainsaw Man",lang:"Hindi Dub • Japanese • English",desc:"Denji Chainsaw Devil ke saath milke devil hunter banta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
+{id:18,title:"Tokyo Revengers",lang:"Hindi Dub • Japanese • English",desc:"Takemichi time travel karke apni girlfriend ko bachane ki koshish karta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:13}]},
+{id:19,title:"Hunter x Hunter",lang:"Hindi Dub • Japanese • English",desc:"Gon apne papa ko dhoondne ke liye Hunter banne nikalta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
+{id:20,title:"Fullmetal Alchemist Brotherhood",lang:"Hindi Dub • Japanese • English",desc:"Do bhai apne shareer wapas lane ke liye Philosopher Stone dhoondte hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
+{id:21,title:"One Punch Man",lang:"Hindi Dub • Japanese • English",desc:"Saitama ek punch me kisi ko bhi hara deta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:12}]},
+{id:22,title:"Mob Psycho 100",lang:"Hindi Dub • Japanese • English",desc:"Mob ke paas 100% psychic power hai, par wo normal life jeena chahta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:13}]},
+{id:23,title:"Dr. Stone",lang:"Hindi Dub • Japanese • English",desc:"Duniya pathar ban jati hai, Senku science se duniya wapas banata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:11}]},
+{id:24,title:"Frieren",lang:"Hindi Dub • Japanese • English",desc:"Elf mage Frieren apne doston ke baad ki zindagi samajhti hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:28}]},
+{id:25,title:"Kaiju No. 8",lang:"Hindi Dub • Japanese • English",desc:"Kafka Kaiju ban jata hai aur Kaiju se ladne wali force me join hota hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
+{id:26,title:"Dan Da Dan",lang:"Hindi Dub • Japanese • English",desc:"Momo aur Okarun ghosts aur aliens se ladte hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
+{id:27,title:"Blue Lock",lang:"Hindi Dub • Japanese • English",desc:"Japan ka best striker banne ke liye 300 players me se ek ko chuna jayega.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24},{name:"Season 2",episodes:14}]},
+{id:28,title:"Haikyuu",lang:"Hindi Dub • Japanese • English",desc:"Hinata volleyball me best banne ke liye Karasuno team me jata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:25}]},
+{id:29,title:"Boruto",lang:"Hindi Dub • Japanese • English",desc:"Naruto ka beta Boruto apni khud ki kahani banata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
+{id:30,title:"My Dress-Up Darling",lang:"Hindi Dub • Japanese • English",desc:"Gojo cosplay banata hai aur Marin ke saath uski duniya badal jati hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
+{id:31,title:"Horimiya",lang:"Hindi Dub • Japanese • English",desc:"School ki topper Hori aur quiet Miyamura ki secret love story.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:13}]},
+{id:32,title:"Kaguya-sama Love is War",lang:"Hindi Dub • Japanese • English",desc:"Do toppers pyaar me pehle confess nahi karna chahte.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:12}]},
+{id:33,title:"Your Name",lang:"Hindi Dub • Japanese • English",desc:"Do strangers ke shareer badal jate hai. Ek emotional masterpiece.",poster:P(),type:"youtube",seasons:[{name:"Movie",episodes:1}]},
+{id:34,title:"Weathering With You",lang:"Hindi Dub • Japanese • English",desc:"Ek ladka baarish rokne wali ladki se milta hai.",poster:P(),type:"youtube",seasons:[{name:"Movie",episodes:1}]},
+{id:35,title:"A Silent Voice",lang:"Hindi Dub • Japanese • English",desc:"Bullying aur maafi ki sabse emotional anime movie.",poster:P(),type:"youtube",seasons:[{name:"Movie",episodes:1}]},
+{id:36,title:"Suzume",lang:"Hindi Dub • Japanese • English",desc:"Suzume darwaze band karke duniya ko bachati hai.",poster:P(),type:"youtube",seasons:[{name:"Movie",episodes:1}]},
+{id:37,title:"Classroom of the Elite",lang:"Hindi Dub • Japanese • English",desc:"Elite school me Ayanokoji apni asli power chhupata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:13}]},
+{id:38,title:"The Eminence in Shadow",lang:"Hindi Dub • Japanese • English",desc:"Cid shadow me sabse strong banna chahta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:20},{name:"Season 2",episodes:12}]},
+{id:39,title:"Shield Hero",lang:"Hindi Dub • Japanese • English",desc:"Naofumi ko Shield Hero banke duniya bachani hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:13}]},
+{id:40,title:"Konosuba",lang:"Hindi Dub • Japanese • English",desc:"Kazuma dusri duniya me sabse funny party ke saath adventure karta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:10},{name:"Season 2",episodes:10}]},
+{id:41,title:"Bungo Stray Dogs",lang:"Hindi Dub • Japanese • English",desc:"Atsushi ek detective agency join karta hai jaha sabke paas powers hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:12}]},
+{id:42,title:"Tokyo Ghoul",lang:"Hindi Dub • Japanese • English",desc:"Kaneki aadha ghoul ban jata hai aur do duniya ke beech phasta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
+{id:43,title:"Parasyte",lang:"Hindi Dub • Japanese • English",desc:"Shinichi ke haath me ek alien parasyte aa jata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:24}]},
+{id:44,title:"Sakamoto Days",lang:"Hindi Dub • Japanese • English",desc:"Ex-hitman Sakamoto ab ek dukaan chalata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:11}]},
+{id:45,title:"Mashle",lang:"Hindi Dub • Japanese • English",desc:"Bina magic wali duniya me Mash sirf muscles se sabko harata hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:12}]},
+{id:46,title:"Solo Leveling - Ragnarok",lang:"Hindi Dub • Japanese • English",desc:"Jinwoo ke bete ki kahani - naya system, naya hunter.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
+{id:47,title:"Look Back",lang:"Hindi Dub • Japanese • English",desc:"Do manga artists ki dosti aur sapne ki emotional kahani.",poster:P(),type:"youtube",seasons:[{name:"Movie",episodes:1}]},
+{id:48,title:"Demon Slayer - Hashira Training",lang:"Hindi Dub • Japanese • English",desc:"Tanjiro Hashira Training ke liye taiyaar hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:8}]},
+{id:49,title:"Vinland - Extra",lang:"Hindi Dub • Japanese • English",desc:"Vikings ki duniya me Thorfinn ki nayi kahani.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
+{id:50,title:"Jobless Reincarnation - OVA",lang:"Hindi Dub • Japanese • English",desc:"Rudeus ki extra kahani aur naye adventures.",poster:P(),type:"youtube",seasons:[{name:"OVA",episodes:2}]},
+{id:51,title:"Frieren - Beyond",lang:"Hindi Dub • Japanese • English",desc:"Frieren ki aage ki journey aur naye dost.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
+{id:52,title:"Naruto - Classic Clips",lang:"Hindi Dub • Japanese • English",desc:"Naruto ke best moments aur fights.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:12}]},
+{id:53,title:"Solo Leveling",lang:"Hindi Dub • Japanese • English",desc:"Duniya ka sabse kamzor hunter Sung Jinwoo, system se sabse strong ban jata hai.",poster:P(),type:"direct",platform:"Crunchyroll",link:"https://www.crunchyroll.com/search?q=Solo%20Leveling",steps:"Step 1: Watch on Crunchyroll dabao<br>Step 2: Crunchyroll App khulegi<br>Step 3: Search me Solo Leveling likho<br>Step 4: Hindi Dub select karke Enjoy karo",seasons:[{name:"Season 1",episodes:12},{name:"Season 2",episodes:13}]},
+{id:54,title:"Naruto + Shippuden",lang:"Hindi Dub • Japanese • English",desc:"Naruto - ek orphan ninja jo Hokage banne ka sapna dekhta hai.",poster:P(),type:"direct",platform:"Crunchyroll",link:"https://www.crunchyroll.com/search?q=Naruto",steps:"Step 1: Watch on Crunchyroll dabao<br>Step 2: Crunchyroll App khulegi<br>Step 3: Search me Naruto likho",seasons:[{name:"Naruto",episodes:24},{name:"Shippuden",episodes:24}]},
+{id:55,title:"Shangri-La Frontier",lang:"Japanese • English",desc:"Rakuro - ek kusoge hunter, ab best VR game Shangri-La Frontier khelta hai.",poster:P(),type:"youtube",seasons:[{name:"Season 1",episodes:25},{name:"Season 2",episodes:25}]},
+{id:56,title:"Demon Slayer",lang:"Hindi Dub • Japanese • English",desc:"Tanjiro apni behen Nezuko ko demon se wapas insan banane ke liye Demon Slayer banta hai.",poster:P(),type:"direct",platform:"JioHotstar",link:"https://www.jiohotstar.com/search?query=Demon%20Slayer",steps:"Step 1: Watch on JioHotstar dabao<br>Step 2: JioHotstar App khulegi<br>Step 3: Search me Demon Slayer likho",seasons:[{name:"Season 1",episodes:26},{name:"Season 2",episodes:18}]},
 ];
 let currentSeason={}; let currentEp={};
 function render(list){
 let html="";
 list.forEach(a=>{
 let sIdx=currentSeason[a.id]||0; let season=a.seasons[sIdx];
-let epBtns=""; for(let i=1;i<=Math.min(season.episodes,24);i++){let act=(currentEp[a.id]===i)?'active':''; epBtns+=`<button class="${act}" onclick="playEp(${a.id},${i},this)">Ep ${i}</button>`;}
+let epBtns=""; for(let i=1;i<=Math.min(season.episodes,24);i++){let act=(currentEp[a.id]===i)?'active':''; epBtns+=`<button class="${act}" onclick="playEp(${a.id},${i},this,'${a.title}')">Ep ${i}</button>`;}
 let playerHtml="";
-if(a.type==="youtube"){ playerHtml=`<div class="player"><iframe id="player-${a.id}" src="https://www.youtube.com/embed/${a.trailerId}" allowfullscreen></iframe></div><p style="font-size:11px;color:#aaa;text-align:center">Poster pe click karo to Trailer • Ep pe click karo to Episode</p>`; }
+if(a.type==="youtube"){ playerHtml=`<div class="player">▶ Episode dabao - Official Site pe khulega<br><span style="font-size:11px">Ab koi Rick Astley / Fake Trailer nahi hai</span></div>`; }
 else{ playerHtml=`<div class="direct-box"><b>${a.title} - Direct Watch</b><br>${a.steps}<a href="${a.link}" target="_blank">Watch on ${a.platform} ➜</a></div>`; }
 let seasonBtns=a.seasons.map((s,idx)=>`<button class="${idx===sIdx?'active':''}" onclick="changeSeason(${a.id},${idx})">${s.name}</button>`).join("");
-html+=`<div class="card"><img src="${a.poster}" onclick="document.getElementById('player-${a.id}')?.scrollIntoView({behavior:'smooth'})"><div class="card-body"><h3>${a.title}</h3><div class="lang">${a.lang}</div><div class="desc">${a.desc}</div>${playerHtml}<div class="season-bar">${seasonBtns}</div><div class="ep-grid">${epBtns}</div><div class="rate" id="rate-${a.id}">${[1,2,3,4,5].map(n=>`<button onclick="rateAnime(${a.id},${n})">★</button>`).join("")} <span style="font-size:12px;color:#aaa">Rate karo</span></div><div class="comment-box"><input placeholder="Comment likho..." onkeydown="if(event.key==='Enter') addComment(${a.id},this)"><div class="comment-list" id="c-${a.id}"></div></div></div></div>`;
+html+=`<div class="card"><img src="${a.poster}"><div class="card-body"><h3>${a.title}</h3><div class="lang">${a.lang}</div><div class="desc">${a.desc}</div>${playerHtml}<div class="season-bar">${seasonBtns}</div><div class="ep-grid">${epBtns}</div><div class="rate" id="rate-${a.id}">${[1,2,3,4,5].map(n=>`<button onclick="rateAnime(${a.id},${n})">★</button>`).join("")} <span style="font-size:12px;color:#aaa">Rate karo</span></div><div class="comment-box"><input placeholder="Comment likho..." onkeydown="if(event.key==='Enter') addComment(${a.id},this)"><div class="comment-list" id="c-${a.id}"></div></div></div></div>`;
 });
 document.getElementById("animeList").innerHTML=html;
 }
 function changeSeason(id,idx){currentSeason[id]=idx;currentEp[id]=0;render(animes);}
-function playEp(id,ep,btn){currentEp[id]=ep;let card=btn.closest('.card');card.querySelectorAll('.ep-grid button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');let iframe=document.getElementById('player-'+id);if(iframe){iframe.src="https://www.youtube.com/embed/dQw4w9WgXcQ";}}
+function playEp(id,ep,btn,title){currentEp[id]=ep;let card=btn.closest('.card');card.querySelectorAll('.ep-grid button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');window.open("https://www.crunchyroll.com/search?q="+encodeURIComponent(title),"_blank");}
 function searchAnime(){let q=document.getElementById("searchInput").value.toLowerCase();let f=animes.filter(a=>a.title.toLowerCase().includes(q));render(f);}
 function rateAnime(id,n){let box=document.getElementById('rate-'+id);box.querySelectorAll('button').forEach((b,i)=>{b.classList.toggle('on',i<n);});}
 function addComment(id,input){if(!input.value.trim())return;document.getElementById('c-'+id).innerHTML+=`<div>${input.value}</div>`;input.value="";}
