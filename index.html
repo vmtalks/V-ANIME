@@ -1,109 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anime Trailers</title>
+<html lang="hi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V-ANIME - Watch Anime Free</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
-body{background:#0b0b10;color:#fff;padding:16px}
-h1{font-size:22px;margin:4px 0 14px}
-h1 span{color:#ff3b5c}
-#grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-@media(min-width:700px){#grid{grid-template-columns:repeat(4,1fr)}}
-@media(min-width:1100px){#grid{grid-template-columns:repeat(5,1fr)}}
-.card{background:#15151d;border-radius:14px;overflow:hidden;cursor:pointer;border:1px solid #262633}
-.poster{position:relative;aspect-ratio:16/9;overflow:hidden}
-.poster img{width:100%;height:100%;object-fit:cover;display:block}
-.play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.play b{width:52px;height:52px;border-radius:50%;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;font-size:22px;border:2px solid #fff}
-.info{padding:10px 10px 12px}
-.info h3{font-size:13px;line-height:1.3;min-height:34px}
-.season-bar{display:flex;gap:4px;margin:8px 0 4px}
-.season-bar i{flex:1;height:6px;border-radius:99px;background:#2a2a38;display:block}
-.season-bar i.on{background:#ff3b5c}
-.season-label{font-size:11px;color:#aaa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0f;color:#fff;font-family:Arial,sans-serif;padding:0 15px 20px}
+.header{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.logo-left{display:flex;align-items:center;gap:10px}
+.logo-left img{width:52px;height:52px;border-radius:50%;border:2px solid #a855f7;object-fit:cover;box-shadow:0 0 18px #a855f7}
+.logo-left h1{font-size:28px;font-weight:900}
+.logo-left h1 span{color:#c084fc;background:linear-gradient(90deg,#e879f9,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+#search{background:#1e1e2a;border:none;color:#aaa;padding:10px 14px;border-radius:20px;font-size:13px;outline:none;width:150px}
+.hero{text-align:center;padding:18px 0 8px;background:linear-gradient(180deg,#1a0a2e 0%,#0a0a0f 100%)}
+.hero img{width:150px;height:150px;border-radius:50%;border:3px solid #a855f7;object-fit:cover;box-shadow:0 0 35px #a855f7}
+.hero h2{font-size:38px;margin:16px 0 6px;font-weight:900}
+.hero h2 span{color:#a855f7}
+.hero p{color:#999;font-size:15px}
+.section{font-size:24px;font-weight:800;margin:22px 0 14px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.card{background:#1e1e28;border-radius:16px;overflow:hidden;cursor:pointer}
+.card .poster img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.cardInfo{padding:12px}
+.cardInfo h3{font-size:18px}
+.cardInfo p{font-size:13px;color:#aaa;margin:5px 0}
+.season-bar{display:flex;gap:4px;margin:8px 0 3px}
+.season-bar i{flex:1;height:5px;border-radius:99px;background:#333;display:block}
+.season-bar i.on{background:#a855f7}
+.season-label{font-size:11px;color:#aaa;margin-bottom:10px}
 .season-label b{color:#fff}
-/* Modal */
+.watch{background:linear-gradient(90deg,#c084fc,#a855f7);border:none;color:#fff;padding:10px;width:100%;border-radius:99px;font-size:14px;font-weight:700;cursor:pointer}
 #modal{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:99;padding:12px}
 #modal.open{display:flex}
 .box{width:100%;max-width:900px}
 .box iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}
-.close{float:right;background:#ff3b5c;border:0;color:#fff;padding:8px 14px;border-radius:99px;margin-bottom:8px;cursor:pointer;font-weight:700}
-</style>
-</head>
-<body>
-<h1>Anime <span>Trailers</span> • 44 Ready</h1>
-<div id="grid"></div>
+.close{float:right;background:#a855f7;border:0;color:#fff;padding:8px 14px;border-radius:99px;margin-bottom:8px;cursor:pointer;font-weight:700}
+</style></head><body>
+
+<div class="header">
+<div class="logo-left"><img src="IMG-20261106-WA0000.jpg"><h1>V-<span>ANIME</span></h1></div>
+<input id="search" placeholder="Search anime..." onkeyup="filterAnime()">
+</div>
+
+<div class="hero">
+<img src="IMG-20261106-WA0000.jpg">
+<h2>Watch <span>Anime</span> Free</h2>
+<p>Best Anime Collection - Hindi & English</p>
+</div>
+
+<div class="section">🔥 Trending Now</div>
+<div class="grid" id="animeGrid"></div>
 
 <div id="modal"><div class="box"><button class="close" onclick="closeModal()">✕ Close</button><iframe id="player" allowfullscreen allow="autoplay; encrypted-media"></iframe></div></div>
 
 <script>
 const data=[
-{t:"Cells at Work",id:"bmQzXqNs6v0",seasons:2,cur:1},
-{t:"Re:Zero Season 4",id:"jqY7fWyEIMY",seasons:4,cur:4},
-{t:"Classroom of the Elite Season 4",id:"urYYpkcayvQ",seasons:4,cur:4},
-{t:"Attack on Titan",id:"vmWAEQ8qIc4",seasons:4,cur:1},
-{t:"I Was Reincarnated as the 7th Prince",id:"aK8Gtxw-9bE",seasons:2,cur:1},
-{t:"BOFURI",id:"7NRUGne6Zjk",seasons:2,cur:1},
-{t:"One Punch Man Season 3",id:"iOFHoZWeEw4",seasons:3,cur:3},
-{t:"Reborn to Master the Blade",id:"VwCIk-vbQiI",seasons:1,cur:1},
-{t:"Appraiser Class - Actually the Strongest",id:"3ZDbVRlCI4o",seasons:1,cur:1},
-{t:"JoJo's Bizarre Adventure Season 1",id:"fvSKmPdD2a4",seasons:6,cur:1},
-{t:"JoJo Season 2 - Stardust Crusaders",id:"0miyPXfTszo",seasons:6,cur:2},
-{t:"JoJo Season 3 - Diamond Is Unbreakable",id:"NLZP_z2PxCw",seasons:6,cur:3},
-{t:"JoJo Season 4 - Golden Wind",id:"dB8607NiXuM",seasons:6,cur:4},
-{t:"I Parry Everything",id:"F6RmPmdpazw",seasons:1,cur:1},
-{t:"Hunter x Hunter",id:"d6kBeJjTGnY",seasons:6,cur:1},
-{t:"Fairy Tail",id:"DDXd4o_XBeE",seasons:9,cur:1},
-{t:"The World's Finest Assassin",id:"4ftVLBguuYc",seasons:2,cur:1},
-{t:"Dandadan",id:"NRxTXed7I7k",seasons:2,cur:1},
-{t:"Tokyo Revengers",id:"Nm21TTXUkf4",seasons:4,cur:1},
-{t:"Campfire Cooking",id:"uLezuU0GL6Q",seasons:2,cur:1},
-{t:"Junji Ito Collection",id:"uRUKmuYMAww",seasons:1,cur:1},
-{t:"Mushoku Tensei Season 1 + 2",id:"1TiBoHQUj3I",seasons:2,cur:1},
-{t:"SPY x FAMILY",id:"5ASJJI_RkiA",seasons:3,cur:1},
-{t:"I Got a Cheat Skill in Another World",id:"twGVFfRI-7s",seasons:2,cur:1},
-{t:"Pokemon Journeys + Ultimate Journeys",id:"Ud-PtULy4gs",seasons:2,cur:1},
-{t:"Pokemon XY + XYZ",id:"hIXdyRpuSLc",seasons:2,cur:1},
-{t:"My Hero Academia Season 2",id:"9ZIgCYSn3e8",seasons:8,cur:2},
-{t:"My Hero Academia Season 1",id:"AhqVltWDqFA",seasons:8,cur:1},
-{t:"Overlord - All Seasons",id:"KOWcj7XKnfQ",seasons:4,cur:1},
-{t:"Blue Lock",id:"IVsII3dLbWc",seasons:2,cur:1},
-{t:"Jujutsu Kaisen",id:"RYI-WG_HFV8",seasons:3,cur:1},
-{t:"Tamon's B-Side",id:"qFmSz2ZVxCA",seasons:1,cur:1},
-{t:"Yowayowa Sensei",id:"UfkutRs8RHM",seasons:1,cur:1},
-{t:"Hero Without a Class",id:"0pwdLZbLOjU",seasons:1,cur:1},
-{t:"Frieren Season 2",id:"n6HZo_33YaQ",seasons:2,cur:2},
-{t:"Frieren Season 1",id:"Iwr1aLEDpe4",seasons:2,cur:1},
-{t:"Aharen-san wa Hakarenai",id:"F7bGTibgcjM",seasons:2,cur:1},
-{t:"Zenshu",id:"SuKb2IymZfA",seasons:1,cur:1},
-{t:"Sentenced to Be a Hero",id:"GcRs1JC7xeg",seasons:1,cur:1},
-{t:"Vinland Saga",id:"UkJmBWvCfNU",seasons:2,cur:1},
-{t:"Attack on Titan Season 4",id:"c14MVY3EVaQ",seasons:4,cur:4},
-{t:"Aoashi",id:"5hIIBK5H-Ug",seasons:2,cur:1},
-{t:"Oshi no Ko Season 1",id:"BQ28u-8c-hI",seasons:3,cur:1},
-{t:"Oshi no Ko Season 2",id:"GKvBR7tR-Kk",seasons:3,cur:2},
+{t:"Mushoku Tensei",g:"Action • Hindi Dub • Smart Player",id:"1TiBoHQUj3I",seasons:2,cur:1},
+{t:"Cells at Work",g:"Action • Hindi Dub",id:"bmQzXqNs6v0",seasons:2,cur:1},
+{t:"Re:Zero Season 4",g:"Action • Original",id:"jqY7fWyEIMY",seasons:4,cur:4},
+{t:"Classroom of the Elite S4",g:"Action • Original",id:"urYYpkcayvQ",seasons:4,cur:4},
+{t:"Attack on Titan",g:"Action • Hindi Dub",id:"vmWAEQ8qIc4",seasons:4,cur:1},
+{t:"7th Prince",g:"Action • Original",id:"aK8Gtxw-9bE",seasons:2,cur:1},
+{t:"BOFURI",g:"Action • Hindi Dub",id:"7NRUGne6Zjk",seasons:2,cur:1},
+{t:"One Punch Man S3",g:"Action • Original",id:"iOFHoZWeEw4",seasons:3,cur:3},
+{t:"Reborn to Master the Blade",g:"Action • Original",id:"VwCIk-vbQiI",seasons:1,cur:1},
+{t:"Appraiser Class",g:"Action • Original",id:"3ZDbVRlCI4o",seasons:1,cur:1},
+{t:"JoJo Season 1",g:"Action • Hindi Dub",id:"fvSKmPdD2a4",seasons:6,cur:1},
+{t:"JoJo Season 2",g:"Action • Hindi Dub",id:"0miyPXfTszo",seasons:6,cur:2},
+{t:"JoJo Season 3",g:"Action • Hindi Dub",id:"NLZP_z2PxCw",seasons:6,cur:3},
+{t:"JoJo Season 4",g:"Action • Hindi Dub",id:"dB8607NiXuM",seasons:6,cur:4},
+{t:"I Parry Everything",g:"Action • Original",id:"F6RmPmdpazw",seasons:1,cur:1},
+{t:"Hunter x Hunter",g:"Action • Hindi Dub",id:"d6kBeJjTGnY",seasons:6,cur:1},
+{t:"Fairy Tail",g:"Action • Hindi Dub",id:"DDXd4o_XBeE",seasons:9,cur:1},
+{t:"World's Finest Assassin",g:"Action • Original",id:"4ftVLBguuYc",seasons:2,cur:1},
+{t:"Dandadan",g:"Action • Hindi Dub",id:"NRxTXed7I7k",seasons:2,cur:1},
+{t:"Tokyo Revengers",g:"Action • Hindi Dub",id:"Nm21TTXUkf4",seasons:4,cur:1},
+{t:"Campfire Cooking",g:"Action • Original",id:"uLezuU0GL6Q",seasons:2,cur:1},
+{t:"Junji Ito Collection",g:"Horror • Original",id:"uRUKmuYMAww",seasons:1,cur:1},
+{t:"SPY x FAMILY",g:"Action • Hindi Dub",id:"5ASJJI_RkiA",seasons:3,cur:1},
+{t:"Cheat Skill in Another World",g:"Action • Original",id:"twGVFfRI-7s",seasons:2,cur:1},
+{t:"Pokemon Journeys",g:"Action • Hindi Dub",id:"Ud-PtULy4gs",seasons:2,cur:1},
+{t:"Pokemon XY + XYZ",g:"Action • Hindi Dub",id:"hIXdyRpuSLc",seasons:2,cur:1},
+{t:"My Hero Academia S2",g:"Action • Hindi Dub",id:"9ZIgCYSn3e8",seasons:8,cur:2},
+{t:"My Hero Academia S1",g:"Action • Hindi Dub",id:"AhqVltWDqFA",seasons:8,cur:1},
+{t:"Overlord",g:"Action • Hindi Dub",id:"KOWcj7XKnfQ",seasons:4,cur:1},
+{t:"Blue Lock",g:"Sports • Hindi Dub",id:"IVsII3dLbWc",seasons:2,cur:1},
+{t:"Jujutsu Kaisen",g:"Action • Hindi Dub",id:"RYI-WG_HFV8",seasons:3,cur:1},
+{t:"Tamon's B-Side",g:"Romance • Original",id:"qFmSz2ZVxCA",seasons:1,cur:1},
+{t:"Yowayowa Sensei",g:"Comedy • Original",id:"UfkutRs8RHM",seasons:1,cur:1},
+{t:"Hero Without a Class",g:"Action • Original",id:"0pwdLZbLOjU",seasons:1,cur:1},
+{t:"Frieren Season 2",g:"Action • Hindi Dub",id:"n6HZo_33YaQ",seasons:2,cur:2},
+{t:"Frieren Season 1",g:"Action • Hindi Dub",id:"Iwr1aLEDpe4",seasons:2,cur:1},
+{t:"Aharen-san",g:"Comedy • Original",id:"F7bGTibgcjM",seasons:2,cur:1},
+{t:"Zenshu",g:"Action • Original",id:"SuKb2IymZfA",seasons:1,cur:1},
+{t:"Sentenced to Be a Hero",g:"Action • Original",id:"GcRs1JC7xeg",seasons:1,cur:1},
+{t:"Vinland Saga",g:"Action • Hindi Dub",id:"UkJmBWvCfNU",seasons:2,cur:1},
+{t:"Attack on Titan S4",g:"Action • Hindi Dub",id:"c14MVY3EVaQ",seasons:4,cur:4},
+{t:"Aoashi",g:"Sports • Original",id:"5hIIBK5H-Ug",seasons:2,cur:1},
+{t:"Oshi no Ko Season 1",g:"Drama • Original",id:"BQ28u-8c-hI",seasons:3,cur:1},
+{t:"Oshi no Ko Season 2",g:"Drama • Original",id:"GKvBR7tR-Kk",seasons:3,cur:2},
 ];
-
-const grid=document.getElementById('grid');
-data.forEach((a,i)=>{
-  let bars='';
-  for(let s=1;s<=a.seasons;s++){ bars+=`<i class="${s<=a.cur?'on':''}"></i>`; }
-  grid.innerHTML+=`<div class="card" onclick="openModal('${a.id}')">
-    <div class="poster"><img src="https://i.ytimg.com/vi/${a.id}/hqdefault.jpg" loading="lazy"><div class="play"><b>▶</b></div></div>
-    <div class="info"><h3>${i+1}. ${a.t}</h3><div class="season-bar">${bars}</div><div class="season-label">Season <b>${a.cur}</b> / ${a.seasons} Seasons • Trailer</div></div>
-  </div>`;
-});
-function openModal(id){
-  document.getElementById('player').src=`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
-  document.getElementById('modal').classList.add('open');
-}
-function closeModal(){
-  document.getElementById('player').src='';
-  document.getElementById('modal').classList.remove('open');
-}
-document.getElementById('modal').addEventListener('click',e=>{ if(e.target.id==='modal') closeModal(); });
+document.getElementById('animeGrid').innerHTML=data.map(a=>{
+  let bars=''; for(let s=1;s<=a.seasons;s++) bars+=`<i class="${s<=a.cur?'on':''}"></i>`;
+  return `<div class="card"><div class="poster"><img src="https://i.ytimg.com/vi/${a.id}/hqdefault.jpg" loading="lazy"></div><div class="cardInfo"><h3>${a.t}</h3><p>${a.g}</p><div class="season-bar">${bars}</div><div class="season-label">Season <b>${a.cur}</b> / ${a.seasons} Seasons</div><button class="watch" onclick="openModal('${a.id}')">▶ Watch Now</button></div></div>`;
+}).join('');
+function filterAnime(){let q=document.getElementById('search').value.toLowerCase();document.querySelectorAll('.card').forEach(c=>{c.style.display=c.textContent.toLowerCase().includes(q)?'block':'none';});}
+function openModal(id){document.getElementById('player').src=`https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;document.getElementById('modal').classList.add('open');}
+function closeModal(){document.getElementById('player').src='';document.getElementById('modal').classList.remove('open');}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal') closeModal();});
 </script>
-</body>
-</html>
+</body></html>
